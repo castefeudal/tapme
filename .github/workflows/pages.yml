@@ -12,6 +12,7 @@ concurrency:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,7 +22,15 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - name: Use HTTPS Ubuntu package mirrors
+        run: |
+          for file in /etc/apt/apt-mirrors.txt /etc/apt/apt-security-mirrors.txt; do
+            if [ -f "$file" ]; then
+              sudo sed -i -e 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' -e 's|http://security.ubuntu.com/ubuntu|https://security.ubuntu.com/ubuntu|g' "$file"
+            fi
+          done
       - run: npx playwright install --with-deps chromium firefox webkit
+        timeout-minutes: 8
       - run: npm run test:e2e
       - name: Record deployed revision
         run: node -e "require('fs').writeFileSync('dist/release.json',JSON.stringify({sha:process.env.GITHUB_SHA}))"
