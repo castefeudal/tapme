@@ -1,5 +1,6 @@
-import { type PlanInput, type ActionPlan, planText } from "./plan";
+import { type PlanInput, type ActionPlan } from "./plan";
 import type { Lang } from "../config/profile";
+import { profile } from '../config/profile';
 export function download(blob: Blob, name: string) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -120,16 +121,61 @@ export async function exportPNG(plan: ActionPlan, a: PlanInput, lang: Lang) {
   const ctx = canvas.getContext("2d");
   if (!ctx) throw Error("Canvas is unavailable");
   const width = 1200,
-    pad = 76,
-    lineHeight = 43;
-  ctx.font = "27px Manrope";
-  const rows = wrapLines(
-    planText(plan, a, lang),
-    width - pad * 2,
-    (value) => ctx.measureText(value).width,
-  );
+    pad = 76;
+  const t = (ru: string, en: string) => (lang === "ru" ? ru : en);
+  const blocks = [
+    { label: t("ЦЕЛЬ", "GOAL"), text: plan.title, size: 44 },
+    { label: t("ПЕРВОЕ ДЕЙСТВИЕ", "FIRST ACTION"), text: plan.today, size: 32 },
+    {
+      label: t("РАСПИСАНИЕ НЕДЕЛИ", "THIS WEEK"),
+      text: plan.sessions
+        .map((s) => `${s.date} · ${a.time} · ${s.minutes} ${t("мин", "min")}`)
+        .join("\n"),
+      size: 27,
+    },
+    { label: t("ПОВТОРЯТЬ", "REPEAT"), text: plan.practice, size: 29 },
+    {
+      label: t("ПРОВЕРКА", "REVIEW"),
+      text: `${plan.checkpoint}\n${plan.review}\n${plan.metric}`,
+      size: 27,
+    },
+    {
+      label: t("ЕСЛИ ПОМЕШАЕТ ПРЕПЯТСТВИЕ", "IF SOMETHING GETS IN THE WAY"),
+      text: plan.obstacle,
+      size: 27,
+    },
+    { label: t('ИНСТРУМЕНТ', 'TOOL'), text: profile.projects[plan.product].name + '\n' + profile.projects[plan.product].url, size: 25 },
+    ...(a.direction === "system"
+      ? [{ label: t("ОТВЕТСТВЕННЫЙ", "OWNER"), text: plan.owner, size: 27 }]
+      : []),
+    ...(a.direction === "mind"
+      ? [
+          {
+            label: t("ПРИВЫЧНОЕ СОБЫТИЕ", "ROUTINE CUE"),
+            text: plan.cue,
+            size: 27,
+          },
+        ]
+      : []),
+  ].map((block) => {
+    ctx.font = `${block.size}px Manrope`;
+    return {
+      ...block,
+      rows: wrapLines(
+        block.text,
+        width - pad * 2,
+        (value) => ctx.measureText(value).width,
+      ),
+    };
+  });
   canvas.width = width;
-  canvas.height = 240 + rows.length * lineHeight + 80;
+  canvas.height =
+    240 +
+    blocks.reduce(
+      (height, b) => height + 75 + b.rows.length * b.size * 1.55,
+      0,
+    ) +
+    130;
   ctx.fillStyle = "#f2efe9";
   ctx.fillRect(0, 0, width, canvas.height);
   ctx.fillStyle = "#181818";
@@ -138,8 +184,25 @@ export async function exportPNG(plan: ActionPlan, a: PlanInput, lang: Lang) {
   ctx.fillStyle = "#a47e4d";
   ctx.fillRect(pad, 155, width - pad * 2, 3);
   ctx.fillStyle = "#282725";
-  ctx.font = "27px Manrope";
-  rows.forEach((row, j) => ctx.fillText(row, pad, 235 + j * lineHeight));
+  let y = 220;
+  for (const block of blocks) {
+    ctx.fillStyle = "#73552f";
+    ctx.font = "600 19px Manrope";
+    ctx.fillText(block.label, pad, y);
+    y += 45;
+    ctx.fillStyle = "#282725";
+    ctx.font = `${block.size}px Manrope`;
+    for (const row of block.rows) {
+      ctx.fillText(row, pad, y);
+      y += block.size * 1.55;
+    }
+    y += 30;
+  }
+  ctx.fillStyle = "#73552f";
+  ctx.fillRect(pad, y, width - pad * 2, 1);
+  y += 45;
+  ctx.font = "22px Manrope";
+  ctx.fillText("castefeudal.github.io/tapme", pad, y);
   return new Promise<Blob>((resolve, reject) =>
     canvas.toBlob(
       (blob) => (blob ? resolve(blob) : reject(Error("PNG export failed"))),

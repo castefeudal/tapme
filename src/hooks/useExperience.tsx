@@ -42,8 +42,8 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.title = t(
-      "Павел Марков — Живое портфолио",
-      "Pavel Markov — A Living Portfolio",
+      "Павел Марков — тренировки, питание, проекты",
+      "Pavel Markov — training, nutrition, projects",
     );
     const desc = t(
       "Предприниматель. Фитнес и нутрициология. Коучинг. Управление проектами. Реальные продукты и твой следующий практический шаг.",

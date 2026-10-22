@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useExperience } from "../hooks/useExperience";
 import { profile } from "../config/profile";
+import { Socials } from "./Socials";
 import { Media } from "./Primitives";
 export function Hero() {
   const { t } = useExperience();
@@ -13,10 +14,10 @@ export function Hero() {
         "Павел с кубком по бодибилдингу",
         "Pavel with a bodybuilding trophy",
       ),
-      tag: t("ДИСЦИПЛИНА В ДЕЙСТВИИ", "DISCIPLINE IN PRACTICE"),
+      tag: t("Личная спортивная практика", "My sporting background"),
       text: t(
-        "Форма — это практика, которую ты повторяешь. Тренировки, питание и понятный прогресс.",
-        "Fitness is a practice you repeat. Training, nutrition and progress you can track.",
+        "Занимаюсь бодибилдингом и кикбоксингом. Работаю с тренировками, питанием и учётом нагрузки.",
+        "My background is in bodybuilding and kickboxing. My work covers training, nutrition and keeping track of workload.",
       ),
       link: "#work-gym",
       cta: t("Мой подход к тренировкам", "Explore my training tools"),
@@ -25,10 +26,10 @@ export function Hero() {
       name: "MIND",
       image: profile.portrait,
       alt: t("Павел Марков в белом костюме", "Pavel Markov in a white suit"),
-      tag: t("ОТ НАМЕРЕНИЯ К ДЕЙСТВИЮ", "FROM INTENTION TO ACTION"),
+      tag: t("Знакомство / Павел Марков", "Introduction / Pavel Markov"),
       text: t(
-        "Предприниматель. Фитнес и нутрициология. Коучинг. Управление проектами. Создаю инструменты, которые помогают переходить от намерений к действиям.",
-        "Entrepreneur. Fitness and nutrition. Coaching. Project management. I create tools that turn intentions into action.",
+        "Я Павел Марков. Работаю с тренировками, питанием и развитием человека. Управляю проектами и создаю цифровые инструменты, которыми можно пользоваться каждый день.",
+        "I’m Pavel Markov. I work in fitness, nutrition and personal development. I also manage projects and build digital tools for everyday use.",
       ),
       link: "#next",
       cta: t("Найти свой следующий шаг", "Find your next move"),
@@ -40,10 +41,10 @@ export function Hero() {
         "Павел выступает на Blockchain Life 2022",
         "Pavel speaking at Blockchain Life 2022",
       ),
-      tag: t("СЛОЖНОЕ СТАНОВИТСЯ ПОНЯТНЫМ", "MAKE COMPLEXITY CLEAR"),
+      tag: t("Blockchain Life / 2022", "Blockchain Life / 2022"),
       text: t(
-        "Проекты, процессы и продукты. Мне интересно создавать системы, которыми удобно пользоваться каждый день.",
-        "Projects, processes and products. I build systems that are useful every day.",
+        "Работаю с проектами и операционными процессами. В PMWORK собрал задачи, сроки, риски и решения в одном рабочем пространстве.",
+        "I work in project and operations management. PMWORK brings tasks, deadlines, risks and decisions into one workspace.",
       ),
       link: "#work-pm",
       cta: t("Посмотреть PMWORK", "Explore PMWORK"),
@@ -57,7 +58,7 @@ export function Hero() {
       aria-labelledby="person-title"
     >
       <div className="cover-kicker">
-        <span>A LIVING PORTFOLIO</span>
+        <span>PERSONAL EDITION / 01</span>
         <span>{t("Форма. Мышление. Система.", "Body. Mind. System.")}</span>
       </div>
       <div className="cover-scene">
@@ -65,12 +66,35 @@ export function Hero() {
           <span>{t("ПАВЕЛ", "PAVEL")}</span>
           <span>{t("МАРКОВ", "MARKOV")}</span>
         </h1>
-        <div className="cover-portrait" key={mode.name}>
+        <div
+          className="cover-portrait"
+          key={mode.name}
+          onPointerMove={(e) => {
+            if (
+              e.pointerType !== "mouse" ||
+              !matchMedia("(prefers-reduced-motion: no-preference)").matches
+            )
+              return;
+            const box = e.currentTarget.getBoundingClientRect();
+            e.currentTarget.style.setProperty(
+              "--portrait-x",
+              `${((e.clientX - box.left) / box.width) * 4 - 2}px`,
+            );
+            e.currentTarget.style.setProperty(
+              "--portrait-y",
+              `${((e.clientY - box.top) / box.height) * 4 - 2}px`,
+            );
+          }}
+          onPointerLeave={(e) => {
+            e.currentTarget.style.setProperty("--portrait-x", "0px");
+            e.currentTarget.style.setProperty("--portrait-y", "0px");
+          }}
+        >
           <Media
             src={mode.image}
             srcSet={
               side === 1
-                ? `${import.meta.env.BASE_URL}media/hero-portrait-small.webp 600w, ${import.meta.env.BASE_URL}media/hero-portrait.webp 1200w`
+                ? `${import.meta.env.BASE_URL}media/hero-portrait-small.webp 600w, ${import.meta.env.BASE_URL}media/hero-portrait-medium.webp 800w, ${import.meta.env.BASE_URL}media/hero-portrait.webp 1200w`
                 : undefined
             }
             sizes={side === 1 ? "(max-width:760px) 90vw, 50vw" : undefined}
@@ -84,7 +108,7 @@ export function Hero() {
         </div>
         <div className="cover-note" key={"text-" + mode.name}>
           <span className="small-label">
-            {t("ЧЕЛОВЕК. ПРАКТИКА. ПРОДУКТЫ.", "PERSON. PRACTICE. PRODUCTS.")}
+            {t("Рад знакомству", "Good to meet you")}
           </span>
           <p>{mode.text}</p>
           <a className="quiet-link" href={mode.link}>
@@ -93,7 +117,7 @@ export function Hero() {
         </div>
         <div className="cover-actions">
           <a className="button solid" href="#next">
-            {t("Получить первый полезный шаг", "Get your first useful step")}
+            {t("Составить план на неделю", "Plan my week")}
             <span aria-hidden="true">↗</span>
           </a>
           <a className="quiet-link" href="#work">
@@ -101,6 +125,7 @@ export function Hero() {
           </a>
         </div>
       </div>
+      <Socials />
       <div className="cover-bottom">
         <div
           className="side-switch"

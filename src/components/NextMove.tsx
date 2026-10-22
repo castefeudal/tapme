@@ -2,7 +2,14 @@ import { migrateLegacy } from "../lib/migrate";
 import { useEffect, useRef, useState } from "react";
 import { useExperience, readLocal, writeLocal } from "../hooks/useExperience";
 import { routes, routeKeys } from "../config/routes";
-import { defaults, validInput, resource, type PlanInput } from "../lib/plan";
+import {
+  defaults,
+  validInput,
+  resource,
+  localDate,
+  type PlanInput,
+} from "../lib/plan";
+import { profile } from "../config/profile";
 import { ActionCard } from "./ActionCard";
 import { Chapter } from "./Primitives";
 import "../styles/next-move.css";
@@ -61,13 +68,13 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
     t("Какой ритм тебе подходит?", "What rhythm works for you?"),
   ];
   return (
-    <section id="next" className="next-chapter chapter-section">
+    <section id="planner" className="next-chapter chapter-section">
       <div className="next-intro">
         <Chapter ru="ТВОЙ СЛЕДУЮЩИЙ ШАГ" en="YOUR NEXT MOVE" />
         <h2>
-          {t("Одна задача.", "One task.")}
+          {t("Что запланируем", "What will you work on")}
           <br />
-          {t("План на неделю.", "A week of action.")}
+          {t("на эту неделю?", "this week?")}
         </h2>
         <p>
           {t(
@@ -115,6 +122,27 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
             <h3 ref={heading} tabIndex={-1}>
               {questions[step]}
             </h3>
+            {step === 1 && (
+              <aside className="instant-preview">
+                <span className="small-label">
+                  {t("Можно начать с этого", "A place to start")}
+                </span>
+                <p>{p(route.goals[0].today)}</p>
+                <a
+                  href={profile.projects[route.product].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {profile.projects[route.product].name}
+                </a>
+                <p className="small-note">
+                  {t(
+                    "Дальше уточним цель и время. Получится план с датами и проверкой результата.",
+                    "Choose your goal and available time next. You’ll get dated actions and a way to review them.",
+                  )}
+                </p>
+              </aside>
+            )}
             {step < 3 ? (
               <div className="answer-list">
                 {(step === 0
@@ -338,6 +366,7 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
             input={input}
             onEdit={() => move(0)}
             onContact={onContact}
+            onReschedule={() => setInput({ ...input, start: localDate() })}
           />
         )}
       </div>

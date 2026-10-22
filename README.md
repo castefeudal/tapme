@@ -1,4 +1,4 @@
-# PAVEL MARKOV — A LIVING PORTFOLIO
+# PAVEL MARKOV — SIGNATURE EDITION
 
 Личный сайт Павла Маркова: шесть глав, настоящие фотографии и продукты, единый инструмент YOUR NEXT MOVE. React + TypeScript + Vite, RU/EN, две темы, статический GitHub Pages. Без регистрации, backend, аналитики и платных API.
 
@@ -20,6 +20,8 @@ npm run preview
 
 Для воспроизведения лабораторных измерений запустите production preview и затем `node scripts/lighthouse.mjs`. Скрипт выполняет три мобильных и три desktop-замера Lighthouse с чистыми профилями Chrome и сохраняет настройки и результаты в docs/performance. Не запускайте параллельно ресурсоёмкие тесты.
 
+Подробный отчёт Signature Edition: [docs/signature-review.md](docs/signature-review.md).
+
 ## Архитектура
 
 - `src/main.tsx` — сборка приложения; без содержимого отдельных глав.
@@ -32,7 +34,7 @@ npm run preview
 - `src/lib/exports.ts` — PNG и RFC 5545 .ics, загружается только при экспорте.
 - `src/styles/` — отдельные токены, типографика, motion и стили глав; нет общего монолитного CSS.
 
-Сведения EREPS и ICA не дополняются выдуманными аккредитациями. Подлинные документы можно подключить через `qualifications[].document`. Спортивные звания отделены от образования. Пустые социальные URL скрыты. MARKOVMADE, MARKOVGYM и PMWORK не изменяются.
+Сведения EREPS и ICA не дополняются выдуманными аккредитациями. Подлинные документы можно подключить через `qualifications[].document`. Спортивные звания отделены от образования. Пустые социальные URL показывают статус в футере; на первом экране доступны только заполненные ссылки. Телефон для vCard задаётся отдельно в profile.phone. MARKOVMADE, MARKOVGYM и PMWORK не изменяются.
 
 ## YOUR NEXT MOVE
 

@@ -9,14 +9,14 @@ export function Proof() {
       <Chapter ru="ПРАКТИКА И ПОДГОТОВКА" en="THE PROOF" />
       <div className="proof-title">
         <h2>
-          {t("За словами —", "Behind the words:")}
+          {t("Спорт, обучение", "Sport, study")}
           <br />
-          {t("личная практика.", "personal practice.")}
+          {t("и работа.", "and work.")}
         </h2>
         <p>
           {t(
-            "Я работаю там, где важны дисциплина, система и понятный результат. В тренировках, в решениях, в продуктах.",
-            "I work where discipline, structure and a clear outcome matter. In training, decisions and products.",
+            "Мой опыт объединяет спорт, фитнес и нутрициологию, коучинг, предпринимательство и управление проектами.",
+            "My experience spans sport, fitness, nutrition, coaching, entrepreneurship and project management.",
           )}
         </p>
       </div>
@@ -104,18 +104,6 @@ export function Proof() {
           />
           <figcaption>Blockchain Life / 2022</figcaption>
         </figure>
-        <blockquote>
-          {t(
-            "«Знать недостаточно. Важно применять».",
-            "“Knowing is not enough. Put it into practice.”",
-          )}
-          <p>
-            {t(
-              "Я ценю простые решения, которые можно повторить. И работу, где результат важнее красивых обещаний.",
-              "I value simple solutions you can repeat. And work where results matter more than promises.",
-            )}
-          </p>
-        </blockquote>
       </div>
     </section>
   );

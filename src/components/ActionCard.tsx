@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { useExperience } from "../hooks/useExperience";
-import { buildPlan, planText, type PlanInput } from "../lib/plan";
+import { buildPlan, planText, localDate, type PlanInput } from "../lib/plan";
 import { profile } from "../config/profile";
 import { External } from "./Primitives";
 export function ActionCard({
   input,
   onEdit,
   onContact,
+  onReschedule,
 }: {
   input: PlanInput;
   onEdit: () => void;
   onContact: (text: string) => void;
+  onReschedule: () => void;
 }) {
   const { t, lang, copy, notify } = useExperience();
   const [busy, setBusy] = useState(false);
@@ -59,10 +61,23 @@ export function ActionCard({
       <h3 ref={title} tabIndex={-1}>
         {plan.title}
       </h3>
+      {input.start < localDate() && (
+        <div className="stale-plan" role="status">
+          <p>
+            {t(
+              "Дата начала этого плана уже прошла. Сохранённые даты не изменены.",
+              "This plan’s start date has passed. Your saved dates are unchanged.",
+            )}
+          </p>
+          <button onClick={onReschedule}>
+            {t("Начать с сегодняшнего дня", "Start from today")}
+          </button>
+        </div>
+      )}
       <div className="action-document-grid">
         <div className="action-main">
           <span className="small-label">
-            {t("НАЧНИ СЕГОДНЯ", "START TODAY")}
+            {input.start === localDate() ? t("НАЧНИ СЕГОДНЯ", "START TODAY") : t("ПЕРВОЕ ДЕЙСТВИЕ", "FIRST ACTION")}
           </span>
           <p className="first-action">{plan.today}</p>
           {input.direction === "mind" && (
@@ -102,22 +117,25 @@ export function ActionCard({
           </details>
         </div>
         <aside className="action-aside">
-          <div className="time-total">
-            <strong>{fmt(plan.capacity.weekly)}</strong>
-            <span>{t("ч / неделю", "h / week")}</span>
-          </div>
-          <p>
-            {fmt(plan.capacity.total)} {t("ч за", "h over")} {input.weeks}{" "}
-            {t("недель", "weeks")}
-            <br />
-            {plan.capacity.sessions}{" "}
-            {t("занятий запланировано", "sessions planned")}
-            <br />
-            {t("Идеальный ресурс:", "Ideal capacity:")}{" "}
-            {fmt(plan.capacity.ideal)} {t("ч", "h")}
-            <br />
-            {t("Разница:", "Gap:")} {fmt(plan.capacity.gap)} {t("ч", "h")}
-          </p>
+          <details className="capacity-details">
+            <summary>{t("Расчёт времени", "Time budget")}</summary>
+            <div className="time-total">
+              <strong>{fmt(plan.capacity.weekly)}</strong>
+              <span>{t("ч / неделю", "h / week")}</span>
+            </div>
+            <p>
+              {fmt(plan.capacity.total)} {t("ч за", "h over")} {input.weeks}{" "}
+              {t("недель", "weeks")}
+              <br />
+              {plan.capacity.sessions}{" "}
+              {t("занятий запланировано", "sessions planned")}
+              <br />
+              {t("Идеальный ресурс:", "Ideal capacity:")}{" "}
+              {fmt(plan.capacity.ideal)} {t("ч", "h")}
+              <br />
+              {t("Разница:", "Gap:")} {fmt(plan.capacity.gap)} {t("ч", "h")}
+            </p>
+          </details>
           <h4>
             {t("Если возникнет препятствие", "When the constraint appears")}
           </h4>

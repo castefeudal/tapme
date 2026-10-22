@@ -1,7 +1,8 @@
+import { ProductCapture } from "./ProductCapture";
 import { useExperience } from "../hooks/useExperience";
 import { profile } from "../config/profile";
 import { showcases } from "../config/showcases";
-import { Chapter, Media, External, base } from "./Primitives";
+import { Chapter, Media, External } from "./Primitives";
 import "../styles/showcases.css";
 export function Showcases() {
   const { t, p } = useExperience();
@@ -10,14 +11,14 @@ export function Showcases() {
       <div className="work-heading chapter-section">
         <Chapter ru="СОЗДАНО МНОЙ" en="THE WORK" />
         <h2>
-          {t("Идеи проверяются", "Ideas prove themselves")}
+          {t("Это мои проекты.", "These are my projects.")}
           <br />
-          {t("в работе.", "in use.")}
+          {t("Открой и попробуй.", "Open one and try it.")}
         </h2>
         <p>
           {t(
-            "Инструменты, которыми я сам хотел бы пользоваться каждый день. Три разные задачи. Три работающих продукта.",
-            "Tools I would want to use every day. Three different challenges. Three working products.",
+            "Расчёты питания, тренировочный журнал и рабочее пространство для проектов. Выбери то, что нужно сейчас.",
+            "Nutrition calculations, a training log and a project workspace. Choose the tool that fits what you’re doing.",
           )}
         </p>
       </div>
@@ -32,29 +33,12 @@ export function Showcases() {
             <h3>{p(s.title)}</h3>
             <p className="audience">{p(s.audience)}</p>
           </div>
-          <figure className="product-capture" data-enter>
-            <a
-              href={base + s.image}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={
-                t("Увеличить снимок ", "Enlarge capture of ") +
-                profile.projects[k].name
-              }
-            >
-              <Media
-                src={s.image}
-                width="1200"
-                height="833"
-                loading="lazy"
-                alt={p(s.alt)}
-              />
-            </a>
-            <figcaption>
-              {p(s.capture)} ·{" "}
-              {t("Нажми, чтобы увеличить", "Select to enlarge")}
-            </figcaption>
-          </figure>
+          <ProductCapture
+            image={s.image}
+            alt={p(s.alt)}
+            capture={p(s.capture)}
+            name={profile.projects[k].name}
+          />
           <div className="showcase-story">
             <span className="small-label">
               {t("ОДИН ПРАКТИЧЕСКИЙ СЦЕНАРИЙ", "ONE PRACTICAL USE")}

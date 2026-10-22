@@ -1,5 +1,6 @@
 import { routes, routeKeys, type RouteKey } from "../config/routes";
 import type { Lang } from "../config/profile";
+import { shortActions } from "../config/short-actions";
 export type PlanInput = {
   direction: RouteKey;
   goal: number;
@@ -104,7 +105,13 @@ export function buildPlan(a: PlanInput, lang: Lang) {
   const b = r.barriers[a.barrier];
   const short = a.minutes <= 15;
   const limited = short || (a.direction === "body" && a.barrier === 3);
-  const today = limited ? b.minimum[i] : g.today[i];
+  const today =
+    a.direction === "body" && a.barrier === 3
+      ? b.minimum[i]
+      : short
+        ? shortActions[a.direction][a.goal][i]
+        : g.today[i];
+  const practice = limited ? today : g.practice[i];
   const capacity = resource(a.minutes, a.days, a.weeks, a.adherence);
   const dates = Array.from({ length: a.days }, (_, j) => {
     const date = new Date(a.start + "T12:00:00");
@@ -113,7 +120,7 @@ export function buildPlan(a: PlanInput, lang: Lang) {
   });
   const sessions = dates.map((date, j) => ({
     date,
-    action: j === 0 ? today : g.practice[i],
+    action: j === 0 ? today : practice,
     minutes: a.minutes,
   }));
   const last = new Date(a.start + "T12:00:00");
@@ -124,7 +131,7 @@ export function buildPlan(a: PlanInput, lang: Lang) {
     direction: r.label[i],
     code: r.code,
     today,
-    practice: g.practice[i],
+    practice,
     review: g.review[i],
     metric: g.metric[i],
     obstacle: b.action[i],

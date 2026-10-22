@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 const expected = execFileSync("git", ["rev-parse", "HEAD"], {
   encoding: "utf8",
 }).trim();
@@ -29,8 +29,24 @@ for (const [, path, file] of assets) {
   )
     throw Error(`Asset mismatch: ${file}`);
 }
+await Promise.all(
+  (await readdir("dist/assets"))
+    .filter((file) => /\.(js|css|woff2)$/.test(file))
+    .map(async (file) => {
+      const remote = await fetch(root + "assets/" + file);
+      if (!remote.ok) throw Error(`Published bundle unavailable: ${file}`);
+      const digest = (value) =>
+        createHash("sha256").update(value).digest("hex");
+      if (
+        digest(Buffer.from(await remote.arrayBuffer())) !==
+        digest(await readFile("dist/assets/" + file))
+      )
+        throw Error(`Published bundle mismatch: ${file}`);
+    }),
+);
 for (const file of [
   "media/hero-portrait.webp",
+  "media/signature-og.jpg",
   "media/fitness.webp",
   "media/portrait-editorial.webp",
   "media/markovmade-preview.webp",
@@ -42,6 +58,14 @@ for (const file of [
 ]) {
   const check = await fetch(root + file, { method: "HEAD" });
   if (!check.ok) throw Error(`Public file unavailable: ${file}`);
+}
+for (const match of html.matchAll(/(?:href|imagesrcset)="([^\"]+)"/g)) {
+  if (!match[1].includes("/assets/") && !match[1].includes("/media/")) continue;
+  for (const entry of match[1].split(",")) {
+    const url = entry.trim().split(/\s+/)[0];
+    const result = await fetch(new URL(url, root), { method: "HEAD" });
+    if (!result.ok) throw Error(`Preloaded asset unavailable: ${url}`);
+  }
 }
 console.log(
   JSON.stringify(

@@ -22,6 +22,9 @@ test("review matrix: viewports, themes, languages and expanded states", async ({
           await page
             .getByRole("button", { name: /Сменить тему|Change theme/ })
             .click();
+        await page.locator("#next").scrollIntoViewIfNeeded();
+        await page.locator(".move-workspace").waitFor();
+        await page.evaluate(() => window.scrollTo(0,0));
         await page.evaluate(async () => {
           await document.fonts.ready;
           for (const img of document.images) img.loading = "eager";
@@ -45,6 +48,7 @@ test("review matrix: viewports, themes, languages and expanded states", async ({
   await page.goto("./");
   if ((await page.locator("html").getAttribute("lang")) !== "ru")
     await page.getByRole("button", { name: "Переключить на русский" }).click();
+  await page.locator("#next").scrollIntoViewIfNeeded();
   const workspace = page.locator(".move-workspace");
   for (let k = 0; k < 3; k++)
     await workspace.locator(".answer-list>button").nth(2).click();

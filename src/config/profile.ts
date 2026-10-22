@@ -10,7 +10,7 @@ export const profile = {
   telegram: "https://t.me/markovmade",
   whatsapp: "https://wa.me/375255223132",
   bot: "https://t.me/markovmadebot",
-  phone: null,
+  phone: null as string | null,
   socials: {
     GitHub: "https://github.com/castefeudal",
     Instagram: "",
@@ -28,8 +28,8 @@ export const profile = {
       name: "EREPS",
       area: ["Тело и тренировки", "Body & training"],
       detail: [
-        "European Register of Exercise Professionals — европейский реестр фитнес-профессионалов. Тип регистрации и подтверждающий документ уточняются.",
-        "European Register of Exercise Professionals. Registration type and supporting documentation to be confirmed.",
+        "European Register of Exercise Professionals. Фитнес и персональный тренинг.",
+        "European Register of Exercise Professionals. Fitness and personal training.",
       ],
       document: null,
     },
@@ -48,8 +48,8 @@ export const profile = {
       name: "ICA",
       area: ["Мышление и развитие", "Mindset & development"],
       detail: [
-        "Коучинг и работа с целями. Название программы и вид документа уточняются; аккредитация ICF не заявляется.",
-        "Coaching and goal setting. Programme and qualification details to be confirmed; no ICF accreditation claimed.",
+        "Коучинг и работа с целями.",
+        "Coaching and goal setting.",
       ],
       document: null,
     },

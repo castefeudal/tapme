@@ -2,6 +2,7 @@ import { viewport, settle } from "./support";
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 async function makePlan(page: Page, branch = 0) {
+  await page.locator("#next").scrollIntoViewIfNeeded();
   const panel = page.locator(".move-workspace");
   for (let k = 0; k < 3; k++)
     await panel
@@ -31,7 +32,7 @@ test("signature portrait modes use real photos", async ({ page }) => {
     );
   }
   await expect(
-    cover.getByRole("link", { name: "Получить первый полезный шаг" }),
+    cover.getByRole("link", { name: "Составить план на неделю" }),
   ).toHaveAttribute("href", "#next");
 });
 for (let branch = 0; branch < 4; branch++)
@@ -44,6 +45,7 @@ for (let branch = 0; branch < 4; branch++)
     const panel = await makePlan(page, branch);
     await expect(panel.locator(".action-document")).toBeVisible();
     await expect(panel.locator(".session-dates>span")).toHaveCount(3);
+    await panel.locator(".capacity-details summary").click();
     await expect(panel.locator(".time-total")).toContainText("1");
     if (branch === 2)
       await expect(panel.locator(".action-brief")).toContainText(
@@ -70,10 +72,12 @@ for (let branch = 0; branch < 4; branch++)
     await page.keyboard.press("Escape");
     await expect(dialog).not.toBeVisible();
     await page.reload();
+    await page.locator("#next").scrollIntoViewIfNeeded();
     await expect(page.locator(".action-document")).toBeVisible();
     await page.getByRole("button", { name: "Switch to English" }).click();
     await page.getByRole("button", { name: "Change theme" }).click();
     await page.reload();
+    await page.locator("#next").scrollIntoViewIfNeeded();
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
     await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
     await expect(page.locator(".action-document")).toContainText("START TODAY");
@@ -239,6 +243,7 @@ test("old preferences and clearing data", async ({ page }) => {
     ),
   );
   await page.goto("./");
+  await page.locator("#next").scrollIntoViewIfNeeded();
   await page.locator(".answer-list>button").nth(2).click();
   await expect(page.locator(".question-meta")).toContainText("SYSTEM");
   await page.getByRole("button", { name: "Очистить локальные данные" }).click();

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Socials, DigitalCard, BrandIcon } from "./Socials";
 import { X } from "lucide-react";
 import { profile } from "../config/profile";
 import { useExperience } from "../hooks/useExperience";
@@ -39,24 +40,14 @@ export function Connection({
           {t("Связаться с Павлом", "Contact Pavel")}
         </button>
       </div>
-      <div className="connection-links">
-        <External href={profile.telegram}>Telegram</External>
-        <External href={profile.whatsapp}>WhatsApp</External>
-        <External href={profile.bot}>Telegram Bot</External>
-        {Object.entries(profile.socials)
-          .filter(([, url]) => url)
-          .map(([name, url]) => (
-            <External key={name} href={url}>
-              {name}
-            </External>
-          ))}
-      </div>
+      <Socials expanded />
+      <DigitalCard />
       <div className="signature-line">
         <span>{t("Павел Марков", "Pavel Markov")}</span>
-        <span>Make progress tangible.</span>
+        <span>PAVEL MARKOV / PERSONAL EDITION</span>
       </div>
       <div className="colophon">
-        <span>© {new Date().getFullYear()} · A LIVING PORTFOLIO</span>
+        <span>© {new Date().getFullYear()} · PAVEL MARKOV</span>
         <button onClick={reset}>
           {t("Очистить локальные данные", "Clear local data")}
         </button>
@@ -140,10 +131,10 @@ export function ContactDialog({
           href={profile.whatsapp + "?text=" + encodeURIComponent(message)}
           className="button solid"
         >
-          WhatsApp
+          <BrandIcon name="WhatsApp" /> WhatsApp
         </External>
         <External href={profile.telegram} className="button outline">
-          Telegram
+          <BrandIcon name="Telegram" /> Telegram
         </External>
       </div>
       <p className="small-note">

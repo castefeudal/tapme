@@ -12,16 +12,16 @@ export const showcases: {
   {
     id: "made",
     title: [
-      "Понимай показатели. Управляй изменениями.",
-      "Understand your numbers. Guide your progress.",
+      "Расчёты питания и история показателей",
+      "Nutrition estimates and a history of your measurements",
     ],
     audience: [
       "Для тех, кто хочет разобраться в питании и физических показателях.",
       "For people who want to understand nutrition and physical measurements.",
     ],
     example: [
-      "Прежде чем менять рацион, оцени потребности, зафиксируй исходные данные и наблюдай динамику.",
-      "Before changing your diet, estimate your needs, record a baseline and observe changes.",
+      "Введи рост, вес, возраст и активность: получишь оценку энергозатрат и ориентиры по питанию. Сохраняй измерения, чтобы сравнить их со временем.",
+      "Enter your height, weight, age and activity to estimate energy needs and nutrition targets. Save measurements to compare changes over time.",
     ],
     feature: [
       "LAB объединяет расчётные инструменты, профиль и историю наблюдений. Оценки помогают ориентироваться, но не заменяют измерения или медицинскую диагностику.",
@@ -40,8 +40,8 @@ export const showcases: {
   {
     id: "gym",
     title: [
-      "Не просто тренируйся. Понимай свой прогресс.",
-      "Go beyond training. Understand your progress.",
+      "Упражнения, программа и журнал",
+      "Exercises, workout plans and a training log",
     ],
     audience: [
       "Для тех, кому нужен понятный тренировочный процесс.",
@@ -68,8 +68,8 @@ export const showcases: {
   {
     id: "pm",
     title: [
-      "Сложная работа. Понятные решения.",
-      "Complex work. Clear decisions.",
+      "Задачи, сроки, риски и решения",
+      "Tasks, deadlines, risks and decisions",
     ],
     audience: [
       "Для Project и Operations Managers и всех, кто отвечает за результат проекта.",
@@ -80,8 +80,8 @@ export const showcases: {
       "Bring work together: the next deliverable, next action, owner and a risk that needs a decision.",
     ],
     feature: [
-      "Рабочая среда объединяет задачи, сроки, риски и решения. Данные остаются в браузере; облачная синхронизация не заявляется.",
-      "The workspace connects tasks, deadlines, risks and decisions. Data stays in your browser; no cloud sync is claimed.",
+      "Рабочая среда объединяет задачи, сроки, риски и решения. Данные сохраняются в браузере.",
+      "The workspace connects tasks, deadlines, risks and decisions. Data is stored in your browser.",
     ],
     image: "media/pmwork-preview.webp",
     alt: [

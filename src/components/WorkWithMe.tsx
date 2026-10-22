@@ -33,12 +33,12 @@ export function WorkWithMe({
     {
       title: t("Коучинг", "Coaching"),
       task: t(
-        "Определить приоритет, сформулировать цель и перейти от размышлений к действиям.",
-        "Choose a priority, define a goal and move from thinking to acting.",
+        "Выбрать приоритет, сформулировать цель и решить, с чего начать.",
+        "Choose a priority, define a goal and decide where to start.",
       ),
       help: t(
-        "Уточним желаемый результат и препятствия. Найдём проверяемый следующий шаг, а не универсальный рецепт.",
-        "Clarify the outcome and obstacles. Find a verifiable next action rather than a universal formula.",
+        "Обсудим желаемый результат, препятствия и доступные варианты. Выберем действие и дату, когда проверим результат.",
+        "Discuss the outcome, obstacles and available options. Choose an action and a date to review what happened.",
       ),
     },
     {
@@ -64,8 +64,8 @@ export function WorkWithMe({
         </h2>
         <p>
           {t(
-            "Без универсальных обещаний. Сначала поймём, чем я могу быть полезен.",
-            "No universal promises. First, let’s see how I can help.",
+            "Расскажи о своей ситуации, цели и ограничениях. Обсудим, чем я могу помочь и какой формат подойдёт.",
+            "Tell me about your situation, goal and constraints. We can discuss how I can help and what format would work.",
           )}
         </p>
       </div>
