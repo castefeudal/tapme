@@ -40,7 +40,7 @@ jobs:
           name: browser-evidence
           path: |
             test-results/
-            docs/preview-*.png
+            docs/evidence/
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

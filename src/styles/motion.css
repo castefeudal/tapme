@@ -1,0 +1,118 @@
+@media (prefers-reduced-motion: no-preference) {
+  .cover h1 > span {
+    animation: name-reveal 0.5s var(--ease) both;
+  }
+  .cover h1 > span:last-child {
+    animation-delay: 0.08s;
+  }
+  .cover-portrait {
+    animation: portrait-reveal 0.42s var(--ease) both;
+  }
+  .cover-note {
+    animation: note-reveal 0.4s var(--ease) both;
+  }
+  .question-scene {
+    animation: question-reveal 0.3s var(--ease) both;
+  }
+  .trajectory .done .trajectory-node {
+    animation: node-join 0.35s var(--ease);
+  }
+  .action-document {
+    animation: document-reveal 0.45s var(--ease) both;
+  }
+  .entered {
+    animation: chapter-reveal 0.7s var(--ease) both;
+  }
+  .product-capture.entered img {
+    animation: product-reveal 0.8s var(--ease) both;
+  }
+  @keyframes name-reveal {
+    from {
+      transform: translateX(-22px);
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      transform: translateX(0);
+      clip-path: inset(0);
+    }
+  }
+  @keyframes portrait-reveal {
+    from {
+      clip-path: inset(0 0 0 100%);
+      transform: translateX(12px);
+    }
+    to {
+      clip-path: inset(0);
+      transform: translateX(0);
+    }
+  }
+  @keyframes note-reveal {
+    from {
+      opacity: 0.5;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes question-reveal {
+    from {
+      opacity: 0.5;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes node-join {
+    from {
+      transform: scale(0.6);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes document-reveal {
+    from {
+      opacity: 0.6;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes chapter-reveal {
+    from {
+      opacity: 0.7;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes product-reveal {
+    from {
+      clip-path: inset(0 0 16%);
+      transform: scale(1.02);
+    }
+    to {
+      clip-path: inset(0);
+      transform: scale(1);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

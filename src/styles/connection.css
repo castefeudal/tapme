@@ -1,0 +1,278 @@
+.collaboration {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 9vw;
+  background: var(--bg);
+}
+.collaboration-heading > p:not(.chapter) {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 340px;
+  margin-top: 25px;
+}
+.service-accordion {
+  border-top: 1px solid var(--line);
+}
+.service-accordion > details {
+  border-bottom: 1px solid var(--line);
+}
+.service-accordion summary {
+  padding: 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  font-size: 25px;
+  letter-spacing: -0.03em;
+}
+.service-accordion summary > span {
+  font-size: 18px;
+  color: var(--accent);
+}
+.service-accordion details > div {
+  padding: 0 0 28px;
+}
+.service-accordion .small-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 20px;
+}
+.service-accordion p {
+  font-size: 15px;
+  margin: 10px 0 0;
+}
+.service-accordion .quiet-link {
+  margin-top: 15px;
+}
+.connection {
+  background: var(--paper);
+  color: var(--paper-text);
+  --muted: var(--paper-muted);
+  --line: var(--paper-line);
+  --accent: #795b33;
+  --button: #29241d;
+  --button-text: #f5f0e7;
+  padding-bottom: 30px;
+}
+.connection h2 {
+  font-size: clamp(62px, 8vw, 130px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.connection-invite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 32px 0 45px;
+}
+.connection-invite p {
+  font-size: 17px;
+  max-width: 490px;
+}
+.connection-invite .button {
+  flex-shrink: 0;
+}
+.connection-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 30px;
+  font-size: 15px;
+  padding: 25px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.connection-links a {
+  padding: 10px 0;
+}
+.connection-links .external-mark {
+  font-size: 14px;
+}
+.signature-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35px;
+  gap: 25px;
+}
+.signature-line > span:first-child {
+  font-family: var(--display);
+  font-size: 32px;
+}
+.signature-line > span:last-child {
+  font-size: 13px;
+}
+.colophon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.colophon > button {
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 12px;
+  padding: 8px 0;
+}
+.contact-dialog {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 30px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  overflow-y: auto;
+}
+.contact-dialog::backdrop {
+  background: #000b;
+  backdrop-filter: blur(4px);
+}
+.dialog-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.contact-dialog h2 {
+  font-size: 43px;
+  margin-bottom: 28px;
+}
+.contact-dialog label {
+  display: block;
+  margin-top: 18px;
+}
+.contact-dialog select {
+  margin-top: 8px;
+}
+.contact-message textarea {
+  font-size: 14px;
+  line-height: 1.7;
+  resize: vertical;
+  margin-top: 8px;
+  min-height: 95px;
+  max-height: 260px;
+}
+.copy-message {
+  font-size: 14px;
+  padding: 10px 0;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  margin: 10px 0;
+}
+.messenger-actions {
+  display: flex;
+  gap: 12px;
+  margin: 15px 0 20px;
+}
+.messenger-actions .button {
+  flex: 1;
+}
+.contact-dialog .small-note {
+  font-size: 13px;
+}
+@media (max-width: 900px) {
+  .collaboration {
+    gap: 5vw;
+  }
+  .service-accordion summary {
+    font-size: 22px;
+  }
+  .connection-invite {
+    max-width: 100%;
+  }
+}
+@media (max-width: 650px) {
+  .collaboration {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .collaboration-heading h2 {
+    font-size: 48px;
+  }
+  .collaboration-heading > p:not(.chapter) {
+    max-width: none;
+    font-size: 16px;
+    margin-top: 22px;
+  }
+  .service-accordion summary {
+    font-size: 24px;
+    padding: 22px 0;
+  }
+  .service-accordion p {
+    font-size: 16px;
+  }
+  .connection h2 {
+    font-size: clamp(48px, 11vw, 73px);
+  }
+  .connection-invite {
+    display: block;
+    margin: 25px 0 35px;
+  }
+  .connection-invite p {
+    font-size: 16px;
+  }
+  .connection-invite .button {
+    margin-top: 25px;
+    width: 100%;
+    justify-content: center;
+  }
+  .connection-links {
+    gap: 10px 25px;
+    font-size: 14px;
+    padding: 20px 0;
+  }
+  .connection-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .signature-line {
+    display: block;
+    margin-top: 28px;
+  }
+  .signature-line > span {
+    display: block;
+  }
+  .signature-line > span:first-child {
+    font-size: 30px;
+  }
+  .signature-line > span:last-child {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .colophon {
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+    margin-top: 25px;
+    font-size: 11px;
+  }
+  .contact-dialog {
+    padding: 22px;
+  }
+  .contact-dialog h2 {
+    font-size: 35px;
+  }
+  .messenger-actions {
+    flex-direction: column;
+  }
+  .messenger-actions .button {
+    width: 100%;
+  }
+  .contact-message textarea {
+    font-size: 15px;
+  }
+  .dialog-top .small-label {
+    font-size: 11px;
+  }
+}

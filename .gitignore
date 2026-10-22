@@ -4,3 +4,5 @@ test-results/
 playwright-report/
 *.local
 tsconfig.tsbuildinfo
+docs/evidence/*.png
+docs/performance/*-[123].json

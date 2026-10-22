@@ -1,0 +1,305 @@
+.proof-chapter {
+  background: var(--bg);
+}
+.proof-title {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 45px;
+}
+.proof-title > p {
+  max-width: 355px;
+  color: var(--muted);
+  font-size: 16px;
+}
+.proof-spread {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 32px 6vw;
+  align-items: start;
+}
+.athlete-frame {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+}
+.athlete-frame img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+}
+.athlete-frame figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 70px 24px 23px;
+  background: linear-gradient(transparent, #000b);
+  color: #f5efe4;
+  font-size: 13px;
+}
+.proof-record {
+  padding-top: 8px;
+}
+.personal-facts {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 25px;
+}
+.personal-facts > span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.personal-facts strong {
+  font-size: 75px;
+  font-family: var(--display);
+  font-weight: 500;
+  color: var(--text);
+  display: block;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.sport-rank {
+  font-size: 18px;
+  margin-bottom: 9px;
+}
+.proof-record > .small-note {
+  max-width: 480px;
+}
+.qualification-timeline {
+  margin-top: 30px;
+}
+.qualification-timeline details {
+  border-top: 1px solid var(--line);
+}
+.qualification-timeline details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.qualification-timeline summary {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 15px 0;
+}
+.qualification-timeline time {
+  color: var(--accent);
+  font-size: 14px;
+}
+.qualification-timeline summary > span {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.qualification-timeline summary strong {
+  font-size: 18px;
+  font-weight: 600;
+  min-width: 70px;
+}
+.qualification-timeline summary > span > span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.qualification-timeline .disclosure {
+  margin-left: auto;
+}
+.qualification-timeline details > p {
+  font-size: 14px;
+  color: var(--muted);
+  padding: 5px 0 18px;
+}
+.practical-work {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 25px;
+}
+.speaker-frame {
+  grid-column: 2;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+.speaker-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 46%;
+}
+.speaker-frame figcaption {
+  position: absolute;
+  left: 20px;
+  bottom: 17px;
+  background: #121212c9;
+  padding: 5px 10px;
+  font-size: 11px;
+  color: #f2efe9;
+}
+.proof-spread blockquote {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  margin: 0;
+  font-family: var(--display);
+  font-size: 34px;
+  line-height: 1.25;
+  max-width: 360px;
+}
+.proof-spread blockquote p {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-top: 20px;
+}
+@media (max-width: 1000px) {
+  .proof-title > p {
+    max-width: 290px;
+  }
+  .proof-spread {
+    gap: 30px 4vw;
+  }
+  .athlete-frame {
+    height: 510px;
+  }
+  .personal-facts {
+    gap: 35px;
+  }
+  .personal-facts strong {
+    font-size: 65px;
+  }
+  .qualification-timeline summary {
+    gap: 20px;
+  }
+  .qualification-timeline summary > span {
+    gap: 15px;
+  }
+  .qualification-timeline summary > span > span {
+    font-size: 12px;
+  }
+  .qualification-timeline summary strong {
+    font-size: 16px;
+    min-width: 60px;
+  }
+  .proof-spread blockquote {
+    font-size: 30px;
+  }
+}
+@media (max-width: 650px) {
+  .proof-title {
+    display: block;
+    margin-bottom: 28px;
+  }
+  .proof-title > p {
+    max-width: 100%;
+    margin-top: 23px;
+    font-size: 16px;
+  }
+  .proof-spread {
+    grid-template-columns: 0.65fr 1fr;
+    gap: 23px;
+  }
+  .athlete-frame {
+    height: 280px;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .athlete-frame figcaption {
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 55px 12px 13px;
+  }
+  .proof-record {
+    display: contents;
+  }
+  .personal-facts {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 22px;
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    margin: 0;
+    padding-top: 15px;
+  }
+  .personal-facts strong {
+    font-size: 53px;
+    margin-bottom: 6px;
+  }
+  .personal-facts > span {
+    font-size: 11px;
+  }
+  .sport-rank {
+    grid-column: 1/-1;
+    font-size: 17px;
+  }
+  .proof-record > .small-note {
+    grid-column: 1/-1;
+    font-size: 13px;
+    margin-top: -15px;
+  }
+  .qualification-timeline {
+    grid-column: 1/-1;
+    margin-top: 0;
+  }
+  .qualification-timeline summary {
+    gap: 25px;
+    padding: 17px 0;
+  }
+  .qualification-timeline summary > span {
+    gap: 20px;
+  }
+  .qualification-timeline summary > span > span {
+    font-size: 12px;
+  }
+  .qualification-timeline details > p {
+    font-size: 14px;
+  }
+  .practical-work {
+    grid-column: 1/-1;
+    margin-top: 0;
+    font-size: 13px;
+  }
+  .speaker-frame {
+    grid-column: 1/-1;
+    grid-row: auto;
+    height: 240px;
+  }
+  .proof-spread blockquote {
+    grid-column: 1/-1;
+    grid-row: auto;
+    font-size: 32px;
+    max-width: none;
+    border-top: 1px solid var(--line);
+    padding-top: 27px;
+  }
+  .proof-spread blockquote p {
+    font-size: 15px;
+    margin-top: 17px;
+  }
+}
+@media (max-width: 350px) {
+  .athlete-frame {
+    height: 260px;
+  }
+  .personal-facts {
+    gap: 18px;
+  }
+  .personal-facts strong {
+    font-size: 48px;
+  }
+  .qualification-timeline summary {
+    gap: 18px;
+  }
+  .qualification-timeline summary > span {
+    gap: 12px;
+  }
+  .qualification-timeline summary > span > span {
+    font-size: 11px;
+  }
+}
+.speaker-frame img {
+  object-position: 60% 20%;
+}
