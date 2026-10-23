@@ -1,5 +1,7 @@
 # Signature Masterpiece — внутренняя приёмка
 
+> Исторический отчёт версии `9a893bc`. Текущая итерация: [Definitive Personal Editorial](definitive-review.md).
+
 Работа в существующем `castefeudal/tapme`. Основа сравнения — опубликованный `fb9001e`. Его снимки сохранены в `masterpiece-before/`; новые — `after-desktop.png`, `after-mobile.png` и CI-артефакт `browser-evidence`.
 
 ## Художественное решение

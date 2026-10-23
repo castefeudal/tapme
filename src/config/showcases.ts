@@ -2,6 +2,8 @@ import type { Pair } from "./profile";
 export const showcases: {
   id: string;
   title: Pair;
+  steps: Pair[];
+  outcome: Pair;
   audience: Pair;
   example: Pair;
   feature: Pair;
@@ -11,6 +13,18 @@ export const showcases: {
 }[] = [
   {
     id: "made",
+    steps: [
+      ["Введи свои данные", "Enter your measurements"],
+      [
+        "Посмотри расчёт и его допущения",
+        "Review the estimate and assumptions",
+      ],
+      ["Сохраняй наблюдения и сравнивай", "Record and compare observations"],
+    ],
+    outcome: [
+      "Сохранённые измерения помогают сверять расчёт с наблюдениями.",
+      "Your measurement history helps compare the estimate with your observations.",
+    ],
     title: [
       "Расчёты питания и история показателей",
       "Nutrition estimates and a history of your measurements",
@@ -20,8 +34,8 @@ export const showcases: {
       "For people who want to understand nutrition and physical measurements.",
     ],
     example: [
-      "Введи рост, вес, возраст и активность: получишь оценку энергозатрат и ориентиры по питанию. Сохраняй измерения, чтобы сравнить их со временем.",
-      "Enter your height, weight, age and activity to estimate energy needs and nutrition targets. Save measurements to compare changes over time.",
+      "Рассчитать ориентир по питанию и сохранить исходные измерения.",
+      "Estimate your nutrition needs and keep a record of your starting measurements.",
     ],
     feature: [
       "LAB объединяет расчётные инструменты, профиль и историю наблюдений. Оценки помогают ориентироваться, но не заменяют измерения или медицинскую диагностику.",
@@ -39,6 +53,18 @@ export const showcases: {
   },
   {
     id: "gym",
+    steps: [
+      [
+        "Найди упражнение и проверь технику",
+        "Find an exercise and review technique",
+      ],
+      ["Добавь его в свою тренировку", "Add it to your workout"],
+      ["Запиши выполненные подходы", "Log the sets you actually complete"],
+    ],
+    outcome: [
+      "В журнале видно, что запланировано и что выполнено.",
+      "The log puts planned work and completed sets side by side.",
+    ],
     title: [
       "Упражнения, программа и журнал",
       "Exercises, workout plans and a training log",
@@ -48,8 +74,8 @@ export const showcases: {
       "For people who want a structured training process.",
     ],
     example: [
-      "Найди упражнение под своё оборудование, проверь технику и добавь его в тренировку. Затем фиксируй нагрузку и повторы.",
-      "Find an exercise for your equipment, check technique and add it to a workout. Then log load and repetitions.",
+      "Подготовить тренировку под своё оборудование и записать выполненную нагрузку.",
+      "Build a workout around your equipment and log the work you complete.",
     ],
     feature: [
       "Библиотека упражнений, конструктор тренировок и журнал помогают связать план с тем, что действительно выполнено.",
@@ -67,6 +93,18 @@ export const showcases: {
   },
   {
     id: "pm",
+    steps: [
+      ["Сформулируй ближайшую задачу", "Define the next task"],
+      ["Назначь владельца и срок", "Set an owner and a deadline"],
+      [
+        "Зафиксируй решение и следующий шаг",
+        "Record the decision and next action",
+      ],
+    ],
+    outcome: [
+      "Решение остаётся рядом с задачей, а не теряется в переписке.",
+      "Decisions stay attached to the task for later reference.",
+    ],
     title: [
       "Задачи, сроки, риски и решения",
       "Tasks, deadlines, risks and decisions",
@@ -76,8 +114,8 @@ export const showcases: {
       "For project and operations managers and anyone accountable for delivery.",
     ],
     example: [
-      "Собери работу в одном месте: ближайший результат, следующий шаг, ответственный и риск, который требует решения.",
-      "Bring work together: the next deliverable, next action, owner and a risk that needs a decision.",
+      "Разобраться, кто делает следующий шаг и к какому сроку.",
+      "Make it clear who takes the next action and when it is due.",
     ],
     feature: [
       "Рабочая среда объединяет задачи, сроки, риски и решения. Данные сохраняются в браузере.",

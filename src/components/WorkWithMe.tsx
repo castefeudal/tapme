@@ -16,7 +16,7 @@ export function WorkWithMe({
       ),
       help: t(
         "Разберём исходную точку, ограничения и организацию тренировочного процесса. Формат работы определим после знакомства с задачей.",
-        "We can review your starting point, constraints and training structure. Agree on a format after discussing the task.",
+        "Tell me about your training, equipment and available time. We can discuss your starting point and agree on a format.",
       ),
     },
     {
@@ -27,7 +27,7 @@ export function WorkWithMe({
       ),
       help: t(
         "Начнём с привычек и наблюдений. Обсудим изменения, которые реально поддерживать в твоём режиме.",
-        "Start with habits and observations. Discuss changes you can sustain in your routine.",
+        "We can start with your habits and observations, then discuss changes that fit your routine.",
       ),
     },
     {
@@ -38,7 +38,7 @@ export function WorkWithMe({
       ),
       help: t(
         "Обсудим желаемый результат, препятствия и доступные варианты. Выберем действие и дату, когда проверим результат.",
-        "Discuss the outcome, obstacles and available options. Choose an action and a date to review what happened.",
+        "We can clarify the outcome and obstacles, choose an action and agree on when to review it.",
       ),
     },
     {
@@ -49,7 +49,7 @@ export function WorkWithMe({
       ),
       help: t(
         "Разберём контекст проекта, ближайший результат и процесс принятия решений. Согласуем объём возможной работы.",
-        "Review the project context, next deliverable and decision process. Agree on a possible scope of work.",
+        "Tell me about the project, next deliverable and current decisions. We can work out what help would be useful.",
       ),
     },
   ];

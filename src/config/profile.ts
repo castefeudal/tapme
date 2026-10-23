@@ -1,5 +1,12 @@
 export type Lang = "ru" | "en";
 export type Pair = readonly [string, string];
+export type VerifiedCase = {
+  title: Pair;
+  task: Pair;
+  work: Pair;
+  result: Pair;
+  evidence: string;
+};
 export const profile = {
   name: ["Павел Марков", "Pavel Markov"] as Pair,
   height: 188,
@@ -52,55 +59,10 @@ export const profile = {
     },
   ],
   projects: [
-    {
-      name: "MARKOVMADE",
-      tag: "BODY / DATA",
-      url: "https://castefeudal.github.io/markovmade/",
-      title: ["Понимай свои показатели.", "Understand your numbers."],
-      text: [
-        "Расчётные инструменты для питания, физического состояния и личного прогресса. Наблюдай за динамикой и принимай решения осознанно.",
-        "Tools for nutrition, physical condition and personal progress. Track changes and make informed decisions.",
-      ],
-      features: [
-        ["Питание", "Nutrition"],
-        ["Расчёты", "Calculations"],
-        ["Динамика", "Trends"],
-      ],
-      number: "01",
-    },
-    {
-      name: "MARKOVGYM",
-      tag: "BODY / TRAINING",
-      url: "https://castefeudal.github.io/markovgym/",
-      title: ["Тренируйся по системе.", "Train with a system."],
-      text: [
-        "Упражнения, программы и журнал тренировок. Планируй занятия, фиксируй подходы и следи за прогрессией.",
-        "Exercises, programmes and a training log. Plan sessions, record sets and track progression.",
-      ],
-      features: [
-        ["Программы", "Programmes"],
-        ["Техника", "Technique"],
-        ["Журнал", "Training log"],
-      ],
-      number: "02",
-    },
-    {
-      name: "PMWORK",
-      tag: "SYSTEM / OPERATIONS",
-      url: "https://castefeudal.github.io/pmwork/",
-      title: ["Делай сложное понятным.", "Make complexity clear."],
-      text: [
-        "Задачи, сроки, риски и ответственность в одной системе. Следующий шаг проекта — перед глазами, а не в памяти.",
-        "Tasks, deadlines, risks and ownership in one system. Keep your next project action visible.",
-      ],
-      features: [
-        ["Задачи", "Tasks"],
-        ["Решения", "Decisions"],
-        ["Локальные данные", "Local data"],
-      ],
-      number: "03",
-    },
+    { name: "MARKOVMADE", url: "https://castefeudal.github.io/markovmade/" },
+    { name: "MARKOVGYM", url: "https://castefeudal.github.io/markovgym/" },
+    { name: "PMWORK", url: "https://castefeudal.github.io/pmwork/" },
   ],
   casteUrl: "",
-  cases: [],
+  cases: [] as VerifiedCase[],
 };

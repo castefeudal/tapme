@@ -58,9 +58,10 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
   }, []);
   const move = (next: number) => {
     setStep(next);
-    requestAnimationFrame(() =>
-      heading.current?.focus({ preventScroll: true }),
-    );
+    requestAnimationFrame(() => {
+      heading.current?.focus({ preventScroll: true });
+      heading.current?.scrollIntoView({ block: "start", behavior: "instant" });
+    });
   };
   const questions = [
     t("Что сейчас требует внимания?", "What needs your attention?"),
@@ -71,7 +72,7 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
   return (
     <section id="planner" className="next-chapter chapter-section">
       <div className="next-intro">
-        <Chapter ru="ТВОЙ СЛЕДУЮЩИЙ ШАГ" en="YOUR NEXT MOVE" />
+        <Chapter ru="III / ТВОЙ СЛЕДУЮЩИЙ ШАГ" en="III / YOUR NEXT MOVE" />
         <h2>
           {t("Что запланируем", "What will you work on")}
           <br />
@@ -79,14 +80,14 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
         </h2>
         <p>
           {t(
-            "Выбери задачу и реальный ресурс. Получи первый шаг, план недели и способ проверить, что получилось.",
-            "Choose a task and a realistic time budget. Get a first action, a week plan and a way to review it.",
+            "Выбери направление и цель — сразу увидишь первое действие. Сохрани базовый план или уточни препятствие, время и расписание.",
+            "Pick an area and a goal to see a first action. Save a basic plan now, or refine the constraint, time budget and schedule.",
           )}
         </p>
         <span className="privacy-note">
           {t(
-            "45–90 секунд · без регистрации · только в твоём браузере",
-            "45–90 seconds · no sign-up · only in your browser",
+            "Первое действие — после двух выборов. Данные остаются в твоём браузере.",
+            "A first action after two choices. Your answers stay in this browser.",
           )}
         </span>
       </div>
@@ -146,10 +147,31 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
                 </a>
                 <p className="small-note">
                   {t(
-                    "Дальше уточним цель и время. Получится план с датами и проверкой результата.",
-                    "Choose your goal and available time next. You’ll get dated actions and a way to review them.",
+                    "Можно начать с этого действия. Для недельного плана уточни то, что мешает, и время.",
+                    "You can start with this action. Refine the constraint and available time for a weekly plan.",
                   )}
                 </p>
+                {step === 2 && (
+                  <div className="quick-plan">
+                    <p>
+                      {t("Базовый ритм", "Suggested rhythm")}: {input.days} ×{" "}
+                      {input.minutes} {t("мин в неделю", "min per week")}.{" "}
+                      {t(
+                        "Препятствие пока не уточнено.",
+                        "Constraint not selected yet.",
+                      )}
+                    </p>
+                    <button
+                      className="quiet-link"
+                      onClick={() => {
+                        setInput({ ...input, barrier: 0, quick: true });
+                        move(4);
+                      }}
+                    >
+                      {t("Сохранить базовый план", "Save a basic plan")} ↗
+                    </button>
+                  </div>
+                )}
               </aside>
             )}
             {step < 3 ? (
@@ -180,15 +202,15 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
                           ? selectDirection(input, routeKeys[k])
                           : {
                               ...input,
-                              ...(step === 0
+                              ...(step === 1
                                 ? {
-                                    direction: routeKeys[k],
-                                    goal: 0,
-                                    barrier: 0,
+                                    goal: k,
+                                    target: "",
+                                    owner: "",
+                                    cue: "",
+                                    quick: false,
                                   }
-                                : step === 1
-                                  ? { goal: k }
-                                  : { barrier: k }),
+                                : { barrier: k, quick: false }),
                             },
                       );
                       move(step + 1);
@@ -381,7 +403,7 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
         ) : (
           <ActionCard
             input={input}
-            onEdit={() => move(0)}
+            onEdit={() => move(input.quick ? 2 : 0)}
             onContact={onContact}
             onReschedule={() => setInput({ ...input, start: localDate() })}
           />

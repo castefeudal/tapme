@@ -16,6 +16,7 @@ describe("category transitions", () => {
     expect(next).toEqual({
       ...old,
       direction: "nutrition",
+      quick: false,
       goal: 0,
       barrier: 0,
       target: "",

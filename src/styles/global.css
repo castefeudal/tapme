@@ -109,7 +109,7 @@ h3[tabindex]:focus {
   padding: 88px var(--gutter);
 }
 .chapter {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.16em;
   line-height: 1.6;
@@ -117,7 +117,7 @@ h3[tabindex]:focus {
   margin-bottom: 28px;
 }
 .small-label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.09em;
   line-height: 1.6;
@@ -200,7 +200,7 @@ h3[tabindex]:focus {
   letter-spacing: -3px;
 }
 .wordmark > span {
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.4;
   letter-spacing: 0.08em;
   max-width: 105px;
@@ -350,7 +350,7 @@ li {
     gap: 18px;
   }
   .navigation > a {
-    font-size: 12px;
+    font-size: 13px;
   }
   .wordmark > span {
     display: none;
@@ -392,7 +392,7 @@ li {
   }
   .wordmark > span {
     display: block;
-    font-size: 11px;
+    font-size: 13px;
   }
   .telegram-short {
     display: none;
@@ -423,12 +423,12 @@ li {
     padding: 52px var(--gutter);
   }
   .chapter {
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.12em;
     margin-bottom: 22px;
   }
   .small-label {
-    font-size: 11px;
+    font-size: 13px;
   }
   .button {
     font-size: 14px;
@@ -464,7 +464,7 @@ li {
     font-size: 37px;
   }
   .wordmark > span {
-    font-size: 11px;
+    font-size: 13px;
     max-width: 75px;
   }
   .nav-controls .icon {
@@ -524,4 +524,19 @@ h3 {
 }
 [hidden] {
   display: none;
+}
+
+@supports (padding: max(0px)) {
+  .site-header {
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
+    padding-right: max(var(--gutter), env(safe-area-inset-right));
+  }
+  .connection {
+    padding-bottom: max(30px, env(safe-area-inset-bottom));
+  }
+  .contact-dialog {
+    max-height: calc(
+      100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
+  }
 }

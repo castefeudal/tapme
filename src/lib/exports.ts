@@ -116,6 +116,7 @@ export function wrapLines(
   return rows;
 }
 export async function exportPNG(plan: ActionPlan, a: PlanInput, lang: Lang) {
+  await document.fonts.load('500 42px "Markov Display"', "PAVEL MARKOV");
   await document.fonts.ready;
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -183,17 +184,23 @@ export async function exportPNG(plan: ActionPlan, a: PlanInput, lang: Lang) {
       0,
     ) +
     130;
-  ctx.fillStyle = "#f2efe9";
+  ctx.fillStyle = "#f4f7f8";
   ctx.fillRect(0, 0, width, canvas.height);
   ctx.fillStyle = "#181818";
-  ctx.font = "600 33px Manrope";
-  ctx.fillText("PAVEL MARKOV / YOUR NEXT MOVE", pad, 110);
-  ctx.fillStyle = "#a47e4d";
+  ctx.font = '500 42px "Markov Display"';
+  ctx.fillText(
+    a.quick
+      ? "PAVEL MARKOV / BASIC PLAN"
+      : "PAVEL MARKOV / PERSONAL ACTION PLAN",
+    pad,
+    110,
+  );
+  ctx.fillStyle = "#245975";
   ctx.fillRect(pad, 155, width - pad * 2, 3);
   ctx.fillStyle = "#282725";
   let y = 220;
   for (const block of blocks) {
-    ctx.fillStyle = "#73552f";
+    ctx.fillStyle = "#245975";
     ctx.font = "600 19px Manrope";
     ctx.fillText(block.label, pad, y);
     y += 45;
@@ -205,7 +212,7 @@ export async function exportPNG(plan: ActionPlan, a: PlanInput, lang: Lang) {
     }
     y += 30;
   }
-  ctx.fillStyle = "#73552f";
+  ctx.fillStyle = "#245975";
   ctx.fillRect(pad, y, width - pad * 2, 1);
   y += 45;
   ctx.font = "22px Manrope";

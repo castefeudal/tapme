@@ -32,8 +32,8 @@ export function Connection({
       <div className="connection-invite">
         <p>
           {t(
-            "Расскажи, что хочешь изменить, создать или улучшить. Начнём с сути.",
-            "Tell me what you want to change, create or improve. Let’s get to the point.",
+            "Напиши, с какой задачей пришёл. Можно сразу в Telegram или WhatsApp — контакты ниже.",
+            "Tell me what you are working on. You can reach me directly on Telegram or WhatsApp below.",
           )}
         </p>
         <button className="button solid" onClick={() => onContact("")}>

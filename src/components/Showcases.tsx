@@ -9,11 +9,11 @@ export function Showcases() {
   return (
     <section id="work" className="work-chapter">
       <div className="work-heading chapter-section">
-        <Chapter ru="СОЗДАНО МНОЙ" en="THE WORK" />
+        <Chapter ru="II / МОИ ПРОЕКТЫ" en="II / THE WORK" />
         <h2>
-          {t("Это мои проекты.", "These are my projects.")}
+          {t("Делаю инструменты,", "Tools I build.")}
           <br />
-          {t("Открой и попробуй.", "Open one and try it.")}
+          {t("которые можно попробовать.", "Ready to try.")}
         </h2>
         <p>
           {t(
@@ -29,7 +29,10 @@ export function Showcases() {
           id={"work-" + s.id}
         >
           <div className="showcase-title">
-            <span className="project-brand">{profile.projects[k].name}</span>
+            <span className="project-brand">
+              <span className="project-number">0{k + 1}</span>
+              {profile.projects[k].name}
+            </span>
             <h3>{p(s.title)}</h3>
             <p className="audience">{p(s.audience)}</p>
           </div>
@@ -44,6 +47,12 @@ export function Showcases() {
               {t("ОДИН ПРАКТИЧЕСКИЙ СЦЕНАРИЙ", "ONE PRACTICAL USE")}
             </span>
             <p>{p(s.example)}</p>
+            <ol className="product-steps">
+              {s.steps.map((step) => (
+                <li key={step[0]}>{p(step)}</li>
+              ))}
+            </ol>
+            <p className="product-outcome">{p(s.outcome)}</p>
             <details>
               <summary>{t("Как это устроено", "How it works")}</summary>
               <p>{p(s.feature)}</p>
@@ -62,16 +71,29 @@ export function Showcases() {
           </div>
         </article>
       ))}
+      {profile.cases.length > 0 && (
+        <div className="verified-cases chapter-section">
+          {profile.cases.map((item) => (
+            <article key={item.evidence}>
+              <h3>{p(item.title)}</h3>
+              <p>{p(item.task)}</p>
+              <p>{p(item.work)}</p>
+              <p>{p(item.result)}</p>
+              <External href={item.evidence}>
+                {t("Подтверждение", "Evidence")}
+              </External>
+            </article>
+          ))}
+        </div>
+      )}
       <div className="ecosystem-notes chapter-section">
         <div>
-          <span className="small-label">
-            {t("ЭКОСИСТЕМА В TELEGRAM", "THE ECOSYSTEM IN TELEGRAM")}
-          </span>
+          <span className="small-label">{t("В TELEGRAM", "IN TELEGRAM")}</span>
           <h3>MARKOVMADE BOT</h3>
           <p>
             {t(
-              "Ещё один удобный вход в мои проекты. Прямо из Telegram.",
-              "Another convenient entry to my projects. Directly in Telegram.",
+              "Открой мои инструменты и материалы прямо в Telegram.",
+              "Open my tools and materials directly in Telegram.",
             )}
           </p>
           <External href={profile.bot} className="quiet-link">

@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
+test.skip(
+  ({ browserName }) => browserName !== "chromium",
+  "Visual evidence captured once; functional tests cover all engines.",
+);
 test("review matrix: viewports, themes, languages and expanded states", async ({
   page,
-}, info) => {
-  test.skip(
-    info.project.name !== "chromium",
-    "Visual evidence captured once; functional tests cover all engines.",
-  );
+}) => {
   test.setTimeout(120000);
   for (const lang of ["ru", "en"])
     for (const theme of ["dark", "light"])
@@ -46,6 +46,8 @@ test("review matrix: viewports, themes, languages and expanded states", async ({
       }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("./");
+  // Isolated component captures should not include the unrelated sticky header.
+  await page.addStyleTag({ content: ".site-header { position: static; }" });
   if ((await page.locator("html").getAttribute("lang")) !== "ru")
     await page.getByRole("button", { name: "Переключить на русский" }).click();
   await page.locator("#next").scrollIntoViewIfNeeded();

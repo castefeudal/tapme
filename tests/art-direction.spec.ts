@@ -1,9 +1,9 @@
 import { test } from "@playwright/test";
-test("review every scene and real product frame", async ({ page }, info) => {
-  test.skip(
-    info.project.name !== "chromium",
-    "Visual evidence once; interactions are tested in every engine.",
-  );
+test.skip(
+  ({ browserName }) => browserName !== "chromium",
+  "Visual evidence once; interactions are tested in every engine.",
+);
+test("review every scene and real product frame", async ({ page }) => {
   test.setTimeout(180000);
   for (const width of [390, 1440])
     for (const lang of ["ru", "en"])

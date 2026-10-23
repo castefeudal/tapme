@@ -3,6 +3,7 @@ import type { Lang } from "../config/profile";
 import { shortActions } from "../config/short-actions";
 export type PlanInput = {
   direction: RouteKey;
+  quick?: boolean;
   goal: number;
   barrier: number;
   minutes: number;
@@ -42,6 +43,7 @@ export function selectDirection(
     : {
         ...input,
         direction,
+        quick: false,
         goal: 0,
         barrier: 0,
         target: "",
@@ -64,6 +66,7 @@ export function validInput(v: unknown): v is PlanInput {
   const a = v as PlanInput;
   return (
     routeKeys.includes(a.direction) &&
+    (a.quick === undefined || typeof a.quick === "boolean") &&
     [a.goal, a.barrier].every((n) => Number.isInteger(n) && n >= 0 && n < 4) &&
     Number.isFinite(a.minutes) &&
     a.minutes >= 10 &&
@@ -151,7 +154,12 @@ export function buildPlan(a: PlanInput, lang: Lang) {
     practice,
     review: g.review[i],
     metric: g.metric[i],
-    obstacle: b.action[i],
+    obstacle: a.quick
+      ? t(
+          "Препятствие пока не выбрано. Если этот ритм не подходит, уточни ответы и доступное время.",
+          "No constraint selected yet. If this rhythm does not work, refine your answers and available time.",
+        )
+      : b.action[i],
     product: r.product,
     capacity,
     sessions,
@@ -172,14 +180,24 @@ export function buildPlan(a: PlanInput, lang: Lang) {
         "После привычного утреннего действия",
         "After an existing morning routine",
       ),
-    why: t(
-      `Цель: «${g.name[0]}». Ограничение: «${b.name[0]}». ${limited ? "Выбрана минимальная версия действия." : "Первое действие соответствует выбранной задаче."} График: ${a.days} × ${a.minutes} минут, реалистичное выполнение ${a.adherence}%.`,
-      `Goal: “${g.name[1]}”. Constraint: “${b.name[1]}”. ${limited ? "A minimum version of the action is used." : "The first action matches the selected task."} Schedule: ${a.days} × ${a.minutes} minutes, realistic adherence ${a.adherence}%.`,
-    ),
-    limit: t(
-      "План основан только на твоих ответах. Это отправная точка, не медицинская или психологическая диагностика и не обещание результата.",
-      "This plan uses only your answers. It is a starting point, not a medical or psychological assessment or a promised outcome.",
-    ),
+    why: a.quick
+      ? t(
+          `Выбрана цель «${g.name[0]}». Это базовый план: препятствие не уточнено. Предложенный ритм: ${a.days} × ${a.minutes} минут. Его можно изменить.`,
+          `Selected goal: “${g.name[1]}”. This is a basic plan; no constraint has been selected. Suggested rhythm: ${a.days} × ${a.minutes} minutes. You can change it.`,
+        )
+      : t(
+          `Цель: «${g.name[0]}». Ограничение: «${b.name[0]}». ${limited ? "Выбрана минимальная версия действия." : "Первое действие соответствует выбранной задаче."} График: ${a.days} × ${a.minutes} минут, реалистичное выполнение ${a.adherence}%.`,
+          `Goal: “${g.name[1]}”. Constraint: “${b.name[1]}”. ${limited ? "A minimum version of the action is used." : "The first action matches the selected task."} Schedule: ${a.days} × ${a.minutes} minutes, realistic adherence ${a.adherence}%.`,
+        ),
+    limit: a.quick
+      ? t(
+          "Цель выбрана тобой, ритм предложен для старта. Уточни его под свою ситуацию. Это не диагностика и не обещание результата.",
+          "You chose the goal; the schedule is a starting suggestion. Adjust it to your circumstances. This is not an assessment or a promised outcome.",
+        )
+      : t(
+          "План основан только на твоих ответах. Это отправная точка, не медицинская или психологическая диагностика и не обещание результата.",
+          "This plan uses only your answers. It is a starting point, not a medical or psychological assessment or a promised outcome.",
+        ),
   };
 }
 export type ActionPlan = ReturnType<typeof buildPlan>;
@@ -188,7 +206,9 @@ export function planText(plan: ActionPlan, a: PlanInput, lang: Lang) {
   const fmt = (n: number) =>
     n.toLocaleString(lang, { maximumFractionDigits: 1 });
   return [
-    t("МОЙ СЛЕДУЮЩИЙ ШАГ", "MY NEXT MOVE"),
+    a.quick
+      ? t("МОЙ БАЗОВЫЙ ПЛАН", "MY BASIC PLAN")
+      : t("МОЙ СЛЕДУЮЩИЙ ШАГ", "MY NEXT MOVE"),
     plan.title,
     "",
     (a.start === localDate()

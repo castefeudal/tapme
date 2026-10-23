@@ -82,22 +82,6 @@ function Planner({ onContact }: { onContact: (text: string) => void }) {
 function App() {
   const { t } = useExperience();
   const [contact, setContact] = useState<string | null>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("entered");
-            observer.unobserve(entry.target);
-          }
-        }),
-      { threshold: 0.08 },
-    );
-    document
-      .querySelectorAll("[data-enter]")
-      .forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
   return (
     <>
       <ReadingProgress />
@@ -107,9 +91,9 @@ function App() {
       <Navigation />
       <main id="main">
         <Hero />
-        <Planner onContact={setContact} />
         <Proof />
         <Showcases />
+        <Planner onContact={setContact} />
         <WorkWithMe onContact={setContact} />
       </main>
       <Connection onContact={setContact} />

@@ -27,6 +27,10 @@ export function ActionCard({
       month: "short",
     });
   useEffect(() => {
+    title.current?.parentElement?.scrollIntoView({
+      block: "start",
+      behavior: "instant",
+    });
     title.current?.focus({ preventScroll: true });
   }, []);
   const exportFile = async (kind: "png" | "ics") => {
@@ -55,12 +59,24 @@ export function ActionCard({
   return (
     <div className="action-document">
       <div className="action-document-top">
-        <span>{t("PM / МОЯ ЗАДАЧА", "PM / MY TASK")}</span>
+        <span>
+          {input.quick
+            ? t("PM / БАЗОВЫЙ ПЛАН", "PM / BASIC PLAN")
+            : t("PM / МОЯ ЗАДАЧА", "PM / MY TASK")}
+        </span>
         <span>{plan.code}</span>
       </div>
       <h3 ref={title} tabIndex={-1}>
         {plan.title}
       </h3>
+      {input.quick && (
+        <p className="basic-plan-note">
+          {t(
+            "Это начальный вариант по выбранной цели. Препятствие и расписание можно уточнить через «Изменить ответы».",
+            "This is a starting plan for your goal. Use ‘Edit answers’ to refine the constraint and schedule.",
+          )}
+        </p>
+      )}
       {input.start < localDate() && (
         <div className="stale-plan" role="status">
           <p>
@@ -89,7 +105,7 @@ export function ActionCard({
             </p>
           )}
           <div className="week-plan">
-            <h4>{t("Следующие 7 дней", "The next seven days")}</h4>
+            <h4>{t("Мой план на 7 дней", "My seven-day plan")}</h4>
             <p>{plan.practice}</p>
             <div className="session-dates">
               {plan.sessions.map((s) => (

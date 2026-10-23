@@ -9,6 +9,9 @@ test("mobile scene changes keep portrait and actions separate", async ({
     await viewport(page, width, 844);
     for (const mode of ["BODY", "MIND", "SYSTEM"]) {
       await page.getByRole("button", { name: mode, exact: true }).click();
+      await page.evaluate(() =>
+        window.scrollTo({ top: 0, behavior: "instant" }),
+      );
       const photo = await page.locator(".cover-portrait").boundingBox();
       const actions = await page.locator(".cover-actions").boundingBox();
       expect(photo).not.toBeNull();

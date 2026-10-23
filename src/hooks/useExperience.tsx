@@ -46,8 +46,8 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       "Pavel Markov — training, nutrition, projects",
     );
     const desc = t(
-      "Предприниматель. Фитнес и нутрициология. Коучинг. Управление проектами. Реальные продукты и твой следующий практический шаг.",
-      "Entrepreneur. Fitness and nutrition. Coaching. Project management. Real products and your next practical step.",
+      "Павел Марков: тренер, нутрициолог, коуч и менеджер проектов. Приложения для тренировок, питания и работы. План на неделю, который можно сохранить.",
+      "Pavel Markov: fitness trainer, nutrition practitioner, coach and project manager. Tools for training, nutrition and work, plus a weekly plan you can save.",
     );
     document
       .querySelector('meta[name="description"]')
@@ -61,7 +61,7 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.theme = theme;
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "dark" ? "#131313" : "#f2efe9");
+      ?.setAttribute("content", theme === "dark" ? "#101315" : "#f5f7f7");
     writeLocal("pm-theme", theme);
   }, [theme]);
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { productScenes } from "../config/product-scenes";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useExperience } from "../hooks/useExperience";
 import { Media, base } from "./Primitives";
 export function ProductCapture({
@@ -18,8 +18,12 @@ export function ProductCapture({
   const scenes = productScenes[name] || [];
   const selected = scenes[scene];
   const file = selected ? "media/" + selected.file + ".webp" : image;
+  const viewport = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (viewport.current) viewport.current.scrollTop = 0;
+  }, [file]);
   return (
-    <figure className="product-capture product-scenes" data-enter>
+    <figure className="product-capture product-scenes">
       <div
         className="capture-controls"
         role="group"
@@ -41,25 +45,41 @@ export function ProductCapture({
           {t("Общий вид", "Overview")}
         </button>
       </div>
-      <a
-        href={base + file}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={t("Увеличить снимок ", "Enlarge capture of ") + name}
+      {selected && (
+        <p className="capture-hint">
+          {t(
+            "Снимок можно прокрутить или открыть целиком",
+            "Scroll the capture or open it in full",
+          )}
+        </p>
+      )}
+      <div
+        ref={viewport}
+        className="capture-viewport"
+        role="region"
+        tabIndex={0}
+        aria-label={t("Снимок интерфейса ", "Interface capture: ") + name}
       >
-        <Media
-          key={file}
-          src={file}
-          width={selected ? 430 : 1200}
-          height={selected ? 900 : 833}
-          loading="lazy"
-          alt={
-            selected
-              ? name + " — " + t(selected.label[0], selected.label[1])
-              : alt
-          }
-        />
-      </a>
+        <a
+          href={base + file}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={t("Увеличить снимок ", "Enlarge capture of ") + name}
+        >
+          <Media
+            key={file}
+            src={file}
+            width={selected ? 430 : 1200}
+            height={selected ? 900 : 833}
+            loading="lazy"
+            alt={
+              selected
+                ? name + " — " + t(selected.label[0], selected.label[1])
+                : alt
+            }
+          />
+        </a>
+      </div>
       <figcaption>
         {selected ? t(selected.note[0], selected.note[1]) : capture} ·{" "}
         {t("Открыть оригинальный снимок", "Open original screenshot")}

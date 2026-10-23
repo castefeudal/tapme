@@ -6,22 +6,22 @@ export function Proof() {
   const { t, p } = useExperience();
   return (
     <section className="proof-chapter chapter-section" id="proof">
-      <Chapter ru="ПРАКТИКА И ПОДГОТОВКА" en="THE PROOF" />
+      <Chapter ru="ОПЫТ И ПОДГОТОВКА" en="BACKGROUND & PRACTICE" />
       <div className="proof-title">
         <h2>
-          {t("Спорт, обучение", "Sport, study")}
+          {t("Мой опыт", "My background")}
           <br />
-          {t("и работа.", "and work.")}
+          {t("и подготовка.", "and training.")}
         </h2>
         <p>
           {t(
-            "Мой опыт объединяет спорт, фитнес и нутрициологию, коучинг, предпринимательство и управление проектами.",
-            "My experience spans sport, fitness, nutrition, coaching, entrepreneurship and project management.",
+            "Бодибилдинг и кикбоксинг — моя спортивная практика. Фитнес, питание и коучинг — направления подготовки. В работе занимаюсь проектами и создаю свои инструменты.",
+            "Bodybuilding and kickboxing are part of my sporting life. My professional training covers fitness, nutrition and coaching. My work includes managing projects and building my own tools.",
           )}
         </p>
       </div>
       <div className="proof-spread">
-        <figure className="athlete-frame" data-enter>
+        <figure className="athlete-frame">
           <Media
             src={profile.fitness}
             width="600"
@@ -103,7 +103,7 @@ export function Proof() {
             )}
           </p>
         </div>
-        <figure className="speaker-frame" data-enter>
+        <figure className="speaker-frame">
           <Media
             src={profile.editorial}
             width="1280"

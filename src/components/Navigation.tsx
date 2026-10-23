@@ -15,9 +15,9 @@ export function Navigation() {
         aria-label={t("Главная навигация", "Main navigation")}
       >
         {[
+          ["proof", t("Человек", "The person")],
+          ["work", t("Проекты", "The work")],
           ["next", t("Твой следующий шаг", "Your next move")],
-          ["proof", t("Практика", "Practice")],
-          ["work", t("Проекты", "Work")],
           ["connection", t("Контакт", "Contact")],
         ].map(([id, name]) => (
           <a key={id} href={"#" + id} onClick={() => setOpen(false)}>

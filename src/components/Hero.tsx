@@ -6,6 +6,7 @@ import { Media } from "./Primitives";
 export function Hero() {
   const { t } = useExperience();
   const [side, setSide] = useState(1);
+  const [hasTransition, setHasTransition] = useState(false);
   const modes = [
     {
       name: "BODY",
@@ -28,7 +29,7 @@ export function Hero() {
       alt: t("Павел Марков в белом костюме", "Pavel Markov in a white suit"),
       tag: t("Знакомство / Павел Марков", "Introduction / Pavel Markov"),
       text: t(
-        "Я Павел Марков. Работаю с тренировками, питанием и развитием человека. Управляю проектами и создаю цифровые инструменты, которыми можно пользоваться каждый день.",
+        "Я Павел Марков. Тренер, нутрициолог и коуч. Управляю проектами и делаю приложения для тренировок, питания и работы.",
         "I’m Pavel Markov. I work in fitness, nutrition and personal development. I also manage projects and build digital tools for everyday use.",
       ),
       link: "#next",
@@ -53,53 +54,33 @@ export function Hero() {
   const mode = modes[side];
   return (
     <section
-      className={"cover side-" + mode.name.toLowerCase()}
+      className={
+        "cover" +
+        (hasTransition ? " has-transition" : "") +
+        " side-" +
+        mode.name.toLowerCase()
+      }
       id="person"
       aria-labelledby="person-title"
     >
       <div className="cover-kicker">
-        <span>PAVEL MARKOV / PERSONAL PRACTICE</span>
-        <span>
-          {t("Человек → практика → продукты", "Person → practice → products")}
-        </span>
+        <span>MARKOV / PERSONAL EDITORIAL</span>
+        <span>{t("I — Человек", "Person → practice → products")}</span>
       </div>
       <div className="cover-scene">
         <h1 id="person-title">
           <span>{t("ПАВЕЛ", "PAVEL")}</span>
           <span>{t("МАРКОВ", "MARKOV")}</span>
         </h1>
-        <div
-          className="cover-portrait"
-          key={mode.name}
-          onPointerMove={(e) => {
-            if (
-              e.pointerType !== "mouse" ||
-              !matchMedia("(prefers-reduced-motion: no-preference)").matches
-            )
-              return;
-            const box = e.currentTarget.getBoundingClientRect();
-            e.currentTarget.style.setProperty(
-              "--portrait-x",
-              `${((e.clientX - box.left) / box.width) * 4 - 2}px`,
-            );
-            e.currentTarget.style.setProperty(
-              "--portrait-y",
-              `${((e.clientY - box.top) / box.height) * 4 - 2}px`,
-            );
-          }}
-          onPointerLeave={(e) => {
-            e.currentTarget.style.setProperty("--portrait-x", "0px");
-            e.currentTarget.style.setProperty("--portrait-y", "0px");
-          }}
-        >
+        <div className="cover-portrait" key={mode.name}>
           <Media
             src={mode.image}
             srcSet={
               side === 1
-                ? `${import.meta.env.BASE_URL}media/hero-portrait-small.webp 600w, ${import.meta.env.BASE_URL}media/hero-portrait-medium.webp 800w, ${import.meta.env.BASE_URL}media/hero-portrait.webp 1200w`
+                ? `${import.meta.env.BASE_URL}media/hero-portrait-small.webp 600w, ${import.meta.env.BASE_URL}media/hero-portrait-mobile.webp 700w, ${import.meta.env.BASE_URL}media/hero-portrait-medium.webp 800w, ${import.meta.env.BASE_URL}media/hero-portrait.webp 1200w`
                 : undefined
             }
-            sizes={side === 1 ? "(max-width:760px) 44vw, (max-width:1100px) 48vw, 46vw" : undefined}
+            sizes={side === 1 ? "(max-width:760px) 90vw, 52vw" : undefined}
             width={side === 0 ? 600 : 1200}
             height={side === 0 ? 771 : 857}
             alt={mode.alt}
@@ -173,7 +154,12 @@ export function Hero() {
             <button
               key={m.name}
               aria-pressed={side === k}
-              onClick={() => setSide(k)}
+              onClick={() => {
+                if (k !== side) {
+                  setHasTransition(true);
+                  setSide(k);
+                }
+              }}
             >
               <span>{m.name}</span>
               <span className="side-indicator" />
@@ -181,8 +167,8 @@ export function Hero() {
           ))}
         </div>
         <p>{t("Смена кадра", "Change the scene")}</p>
-        <a className="cover-index" href="#next">
-          {t("ДАЛЬШЕ — ТВОЙ ШАГ", "NEXT — YOUR MOVE")}{" "}
+        <a className="cover-index" href="#proof">
+          {t("ПОЗНАКОМИМСЯ БЛИЖЕ", "NEXT — YOUR MOVE")}{" "}
           <span aria-hidden="true">↓</span>
         </a>
       </div>

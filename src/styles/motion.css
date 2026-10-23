@@ -8,36 +8,7 @@
   .action-document {
     animation: document-reveal 0.45s var(--ease) both;
   }
-  @keyframes name-reveal {
-    from {
-      transform: translateX(-22px);
-      clip-path: inset(0 100% 0 0);
-    }
-    to {
-      transform: translateX(0);
-      clip-path: inset(0);
-    }
-  }
-  @keyframes portrait-reveal {
-    from {
-      clip-path: inset(0 0 0 100%);
-      transform: translateX(12px);
-    }
-    to {
-      clip-path: inset(0);
-      transform: translateX(0);
-    }
-  }
-  @keyframes note-reveal {
-    from {
-      opacity: 0.5;
-      transform: translateY(6px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+
   @keyframes question-reveal {
     from {
       opacity: 0.5;
@@ -64,26 +35,6 @@
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-  @keyframes chapter-reveal {
-    from {
-      opacity: 0.7;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes product-reveal {
-    from {
-      clip-path: inset(0 0 16%);
-      transform: scale(1.02);
-    }
-    to {
-      clip-path: inset(0);
-      transform: scale(1);
     }
   }
 }
