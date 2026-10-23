@@ -76,7 +76,6 @@
 .product-capture img {
   width: 100%;
   height: auto;
-  aspect-ratio: 1200/833;
   object-fit: cover;
   object-position: top;
 }

@@ -68,10 +68,47 @@ test("two clear audience paths and actual product states", async ({ page }) => {
   for (const figure of await page.locator(".product-scenes").all()) {
     const first = await figure.locator("img").getAttribute("src");
     await figure.locator(".capture-controls button").nth(1).click();
-    expect(await figure.locator("img").getAttribute("src")).not.toBe(first);
+    await expect(figure.locator("img")).not.toHaveAttribute("src", first!);
     await expect(
       figure.locator(".capture-controls button").nth(1),
     ).toHaveAttribute("aria-pressed", "true");
   }
   await expect(page.locator(".social-pending")).toHaveCount(0);
+});
+
+test("portrait product captures use their natural proportions on mobile", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  let releaseImage!: () => void;
+  const imageGate = new Promise<void>((resolve) => {
+    releaseImage = resolve;
+  });
+  await page.route("**/media/made-input.webp", async (route) => {
+    await imageGate;
+    await route.continue();
+  });
+  await page.goto("./");
+  const firstImage = page.locator(".product-scenes").first().locator("img");
+  await firstImage.scrollIntoViewIfNeeded();
+  const reserved = await firstImage.boundingBox();
+  expect(reserved).not.toBeNull();
+  // The dimensions must reserve the portrait space before any image bytes arrive.
+  expect(reserved!.height / reserved!.width).toBeCloseTo(900 / 430, 1);
+  releaseImage();
+  for (const capture of await page.locator(".product-scenes").all()) {
+    await capture.scrollIntoViewIfNeeded();
+    const image = capture.locator("img");
+    await expect
+      .poll(() =>
+        image.evaluate((img) => {
+          const picture = img as HTMLImageElement;
+          return picture.complete && picture.naturalWidth > 0;
+        }),
+      )
+      .toBe(true);
+    const box = await image.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.height / box!.width).toBeCloseTo(900 / 430, 1);
+  }
 });

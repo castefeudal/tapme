@@ -1,7 +1,7 @@
 {
   "mobile": {
     "lighthouseVersion": "13.5.0",
-    "fetchTime": "2026-10-23T00:13:41.541Z",
+    "fetchTime": "2026-10-23T12:23:31.990Z",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
     "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
     "throttlingMethod": "simulate",
@@ -23,7 +23,7 @@
   },
   "desktop": {
     "lighthouseVersion": "13.5.0",
-    "fetchTime": "2026-10-23T00:14:11.938Z",
+    "fetchTime": "2026-10-23T12:24:00.117Z",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
     "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
     "throttlingMethod": "simulate",

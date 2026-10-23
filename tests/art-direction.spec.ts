@@ -26,14 +26,19 @@ test("review every scene and real product frame", async ({ page }, info) => {
           await page
             .locator(".cover img")
             .evaluate((img) => (img as HTMLImageElement).decode());
-          await page
-            .locator(".cover")
-            .screenshot({
-              path: `docs/evidence/master-${width}-${lang}-${theme}-${mode}.png`,
-            });
+          // Capture the actual first viewport. Element screenshots can scroll
+          // the cover beneath the sticky header and distort the visual evidence.
+          await page.evaluate(() => {
+            (document.activeElement as HTMLElement | null)?.blur();
+            window.scrollTo({ top: 0, behavior: "instant" });
+          });
+          await page.screenshot({
+            path: `docs/evidence/master-${width}-${lang}-${theme}-${mode}.png`,
+          });
         }
       }
-  await page.setViewportSize({ width: 390, height: 900 });
+  // Keep each complete portrait frame and caption inside the capture viewport.
+  await page.setViewportSize({ width: 390, height: 1500 });
   for (const [index, figure] of (
     await page.locator(".product-scenes").all()
   ).entries())
