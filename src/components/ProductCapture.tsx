@@ -1,5 +1,5 @@
 import { productScenes } from "../config/product-scenes";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useExperience } from "../hooks/useExperience";
 import { Media, base } from "./Primitives";
 export function ProductCapture({
@@ -18,10 +18,6 @@ export function ProductCapture({
   const scenes = productScenes[name] || [];
   const selected = scenes[scene];
   const file = selected ? "media/" + selected.file + ".webp" : image;
-  const viewport = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (viewport.current) viewport.current.scrollTop = 0;
-  }, [file]);
   return (
     <figure className="product-capture product-scenes">
       <div
@@ -54,7 +50,7 @@ export function ProductCapture({
         </p>
       )}
       <div
-        ref={viewport}
+        key={file}
         className="capture-viewport"
         role="region"
         tabIndex={0}

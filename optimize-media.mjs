@@ -13,7 +13,13 @@ for (const [source, name, width] of [
     .webp({ quality: 83 })
     .toFile("public/media/" + name + ".webp");
 }
-await sharp("public/media/hero-portrait.webp")
-  .resize(600)
-  .webp({ quality: 83 })
-  .toFile("public/media/hero-portrait-small.webp");
+for (const [suffix, width, quality] of [
+  ["small", 600, 83],
+  ["mobile", 700, 85],
+  ["medium", 800, 83],
+]) {
+  await sharp("public/media/hero-portrait.webp")
+    .resize({ width, withoutEnlargement: true })
+    .webp({ quality, effort: 6 })
+    .toFile(`public/media/hero-portrait-${suffix}.webp`);
+}
