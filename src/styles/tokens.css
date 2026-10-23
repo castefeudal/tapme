@@ -4,18 +4,25 @@
   --text: #f2efe9;
   --muted: #b4afa6;
   --line: #45413b;
-  --accent: #c4a57a;
-  --button: #dbc8a9;
+  --accent: #c6c0b4;
+  --button: #d6d2c8;
   --button-text: #201c16;
   --paper: #efebe3;
   --paper-text: #25221e;
   --paper-muted: #676057;
   --paper-line: #c9c0b3;
-  --display: Oswald, "Arial Narrow", sans-serif;
   --body: Manrope, Arial, sans-serif;
   --ease: cubic-bezier(0.22, 0.72, 0.15, 1);
   --gutter: clamp(22px, 5vw, 96px);
+  --editorial: "Signature Serif", Georgia, serif;
+  --radius-photo: 2px;
+  --radius-control: 4px;
+  --control-size: 44px;
+  --duration-scene: 400ms;
+  --space-section: clamp(64px, 6.25vw, 120px);
+  --measure-body: 65ch;
   color-scheme: dark;
+  --display: Manrope, Arial, sans-serif;
 }
 [data-theme="light"] {
   --bg: #f2efe9;
@@ -23,7 +30,7 @@
   --text: #25221e;
   --muted: #686157;
   --line: #c6bcae;
-  --accent: #7c5b30;
+  --accent: #655a4d;
   --button: #29241d;
   --button-text: #f2efe9;
   --paper: #e5dfd4;

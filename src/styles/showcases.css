@@ -20,6 +20,7 @@
   font-size: 16px;
 }
 .showcase {
+  scroll-margin-top: 95px;
   padding: 60px var(--gutter);
   display: grid;
   gap: 30px 5vw;
@@ -34,9 +35,6 @@
   margin-bottom: 22px;
 }
 .showcase h3 {
-  font-family: var(--display);
-  font-size: clamp(36px, 4.3vw, 64px);
-  line-height: 1.12;
   letter-spacing: -0.02em;
   max-width: 620px;
 }
@@ -376,4 +374,97 @@
 }
 .showcase-made figcaption {
   color: #3f3426;
+}
+.showcase h3 {
+  font-family:
+    Signature Serif,
+    Georgia,
+    serif;
+  font-weight: 400;
+  font-size: clamp(29px, 3vw, 48px);
+  line-height: 1.2;
+}
+.capture-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.capture-controls button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #776a59;
+  font-size: 12px;
+  border-radius: 4px;
+  color: #25221e;
+  background: #efebe3;
+}
+.capture-controls button[aria-pressed="true"] {
+  background: var(--button);
+  color: var(--button-text);
+  border-color: var(--button);
+}
+@media (max-width: 760px) {
+  .capture-controls button {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+}
+.product-scenes > a {
+  display: block;
+  max-width: 430px;
+  margin-inline: auto;
+  overflow: hidden;
+  background: #15191c;
+}
+.product-scenes > a img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  transform: none;
+  object-fit: contain;
+  animation: none;
+}
+.product-scenes figcaption {
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+.showcase-made .product-capture {
+  transform: none;
+  max-width: 470px;
+  width: 100%;
+  justify-self: center;
+  background: #cfc7b9;
+}
+.showcase-pm .product-capture {
+  max-width: 470px;
+  width: 100%;
+  justify-self: center;
+}
+.capture-controls button {
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 46px;
+}
+@media (max-width: 760px) {
+  .product-scenes > a {
+    max-width: 430px;
+  }
+  .product-scenes > a img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .capture-controls button {
+    font-size: 12px;
+    flex: 1;
+    padding: 10px 8px;
+  }
+  .product-scenes figcaption {
+    font-size: 13px;
+  }
 }

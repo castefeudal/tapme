@@ -1,0 +1,16 @@
+.planner-host {
+  scroll-margin-top: 95px;
+}
+.plan-loading {
+  min-height: 1050px;
+  padding: 90px var(--gutter);
+  background: var(--paper);
+  color: var(--paper-text);
+}
+
+.plan-loading[role="alert"] {
+  min-height: 360px;
+}
+.plan-loading .button {
+  margin-top: 24px;
+}

@@ -1,16 +1,4 @@
 @media (prefers-reduced-motion: no-preference) {
-  .cover h1 > span {
-    animation: name-reveal 0.5s var(--ease) both;
-  }
-  .cover h1 > span:last-child {
-    animation-delay: 0.08s;
-  }
-  .cover-portrait {
-    animation: portrait-reveal 0.42s var(--ease) both;
-  }
-  .cover-note {
-    animation: note-reveal 0.4s var(--ease) both;
-  }
   .question-scene {
     animation: question-reveal 0.3s var(--ease) both;
   }
@@ -19,12 +7,6 @@
   }
   .action-document {
     animation: document-reveal 0.45s var(--ease) both;
-  }
-  .entered {
-    animation: chapter-reveal 0.7s var(--ease) both;
-  }
-  .product-capture.entered img {
-    animation: product-reveal 0.8s var(--ease) both;
   }
   @keyframes name-reveal {
     from {

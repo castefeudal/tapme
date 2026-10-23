@@ -7,6 +7,7 @@ import {
   validInput,
   resource,
   localDate,
+  selectDirection,
   type PlanInput,
 } from "../lib/plan";
 import { profile } from "../config/profile";
@@ -122,12 +123,20 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
             <h3 ref={heading} tabIndex={-1}>
               {questions[step]}
             </h3>
-            {step === 1 && (
+            {step >= 1 && (
               <aside className="instant-preview">
                 <span className="small-label">
-                  {t("Можно начать с этого", "A place to start")}
+                  {step === 1
+                    ? t(
+                        "Пример для этого направления",
+                        "An example for this area",
+                      )
+                    : t(
+                        "Первое действие для твоей цели",
+                        "A first action for your goal",
+                      )}
                 </span>
-                <p>{p(route.goals[0].today)}</p>
+                <p>{p(route.goals[input.goal].today)}</p>
                 <a
                   href={profile.projects[route.product].url}
                   target="_blank"
@@ -166,14 +175,22 @@ export function NextMove({ onContact }: { onContact: (text: string) => void }) {
                   <button
                     key={p(answer.name)}
                     onClick={() => {
-                      setInput({
-                        ...input,
-                        ...(step === 0
-                          ? { direction: routeKeys[k], goal: 0, barrier: 0 }
-                          : step === 1
-                            ? { goal: k }
-                            : { barrier: k }),
-                      });
+                      setInput(
+                        step === 0
+                          ? selectDirection(input, routeKeys[k])
+                          : {
+                              ...input,
+                              ...(step === 0
+                                ? {
+                                    direction: routeKeys[k],
+                                    goal: 0,
+                                    barrier: 0,
+                                  }
+                                : step === 1
+                                  ? { goal: k }
+                                  : { barrier: k }),
+                            },
+                      );
                       move(step + 1);
                     }}
                   >

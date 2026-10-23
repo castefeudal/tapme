@@ -55,7 +55,7 @@ export function ActionCard({
   return (
     <div className="action-document">
       <div className="action-document-top">
-        <span>PM / PERSONAL ACTION CARD</span>
+        <span>{t("PM / МОЯ ЗАДАЧА", "PM / MY TASK")}</span>
         <span>{plan.code}</span>
       </div>
       <h3 ref={title} tabIndex={-1}>
@@ -77,12 +77,14 @@ export function ActionCard({
       <div className="action-document-grid">
         <div className="action-main">
           <span className="small-label">
-            {input.start === localDate() ? t("НАЧНИ СЕГОДНЯ", "START TODAY") : t("ПЕРВОЕ ДЕЙСТВИЕ", "FIRST ACTION")}
+            {input.start === localDate()
+              ? t("НАЧНИ СЕГОДНЯ", "START TODAY")
+              : t("ПЕРВОЕ ДЕЙСТВИЕ", "FIRST ACTION")}
           </span>
           <p className="first-action">{plan.today}</p>
           {input.direction === "mind" && (
             <p className="cue-line">
-              {t("Твой триггер: ", "Your cue: ")}
+              {t("Начать после: ", "Start after: ")}
               <strong>{plan.cue}</strong> · {input.time}
             </p>
           )}
@@ -136,13 +138,11 @@ export function ActionCard({
               {t("Разница:", "Gap:")} {fmt(plan.capacity.gap)} {t("ч", "h")}
             </p>
           </details>
-          <h4>
-            {t("Если возникнет препятствие", "When the constraint appears")}
-          </h4>
+          <h4>{t("Если не получается", "If it gets difficult")}</h4>
           <p>{plan.obstacle}</p>
           {input.direction === "system" && (
             <div className="action-brief">
-              <h4>Action Brief</h4>
+              <h4>{t("Договорённость по задаче", "Task brief")}</h4>
               <dl>
                 <dt>{t("Ответственный", "Owner")}</dt>
                 <dd>{plan.owner}</dd>
@@ -160,7 +160,7 @@ export function ActionCard({
             {profile.projects[plan.product].name}
           </External>
           <span className="small-note">
-            {t("Инструмент для следующего шага", "A tool for your next step")}
+            {t("Продолжить в приложении", "Continue in the app")}
           </span>
         </aside>
       </div>

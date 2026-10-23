@@ -24,7 +24,7 @@ test("review matrix: viewports, themes, languages and expanded states", async ({
             .click();
         await page.locator("#next").scrollIntoViewIfNeeded();
         await page.locator(".move-workspace").waitFor();
-        await page.evaluate(() => window.scrollTo(0,0));
+        await page.evaluate(() => window.scrollTo(0, 0));
         await page.evaluate(async () => {
           await document.fonts.ready;
           for (const img of document.images) img.loading = "eager";

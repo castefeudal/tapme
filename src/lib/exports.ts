@@ -1,6 +1,6 @@
 import { type PlanInput, type ActionPlan } from "./plan";
 import type { Lang } from "../config/profile";
-import { profile } from '../config/profile';
+import { profile } from "../config/profile";
 export function download(blob: Blob, name: string) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -144,7 +144,14 @@ export async function exportPNG(plan: ActionPlan, a: PlanInput, lang: Lang) {
       text: plan.obstacle,
       size: 27,
     },
-    { label: t('ИНСТРУМЕНТ', 'TOOL'), text: profile.projects[plan.product].name + '\n' + profile.projects[plan.product].url, size: 25 },
+    {
+      label: t("ИНСТРУМЕНТ", "TOOL"),
+      text:
+        profile.projects[plan.product].name +
+        "\n" +
+        profile.projects[plan.product].url,
+      size: 25,
+    },
     ...(a.direction === "system"
       ? [{ label: t("ОТВЕТСТВЕННЫЙ", "OWNER"), text: plan.owner, size: 27 }]
       : []),

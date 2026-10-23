@@ -8,37 +8,37 @@
       "best-practices": 100,
       "seo": 100
     },
-    "LCP": 2297.035,
-    "CLS": 0.000138809083142355,
-    "TBT": 26.5,
+    "LCP": 2376.714375,
+    "CLS": 0,
+    "TBT": 29.5,
     "failed": []
   },
   {
     "mode": "mobile",
     "run": 2,
     "scores": {
-      "performance": 97,
+      "performance": 96,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
-    "LCP": 2307.2623750000002,
-    "CLS": 0.000138809083142355,
-    "TBT": 43.5,
+    "LCP": 2351.2580000000003,
+    "CLS": 0,
+    "TBT": 24.5,
     "failed": []
   },
   {
     "mode": "mobile",
     "run": 3,
     "scores": {
-      "performance": 97,
+      "performance": 96,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
-    "LCP": 2319.913,
-    "CLS": 0.000138809083142355,
-    "TBT": 49,
+    "LCP": 2350.0711,
+    "CLS": 0,
+    "TBT": 18.5,
     "failed": []
   },
   {
@@ -50,8 +50,8 @@
       "best-practices": 100,
       "seo": 100
     },
-    "LCP": 547.879375,
-    "CLS": 0.0001883196368113266,
+    "LCP": 552.4394,
+    "CLS": 0.000007319098184056633,
     "TBT": 0,
     "failed": []
   },
@@ -64,8 +64,8 @@
       "best-practices": 100,
       "seo": 100
     },
-    "LCP": 552.1918000000001,
-    "CLS": 0.0001883196368113266,
+    "LCP": 537.03,
+    "CLS": 0.000007319098184056633,
     "TBT": 0,
     "failed": []
   },
@@ -78,8 +78,8 @@
       "best-practices": 100,
       "seo": 100
     },
-    "LCP": 530.3395,
-    "CLS": 0.0001883196368113266,
+    "LCP": 558.8246999999999,
+    "CLS": 0.000007319098184056633,
     "TBT": 0,
     "failed": []
   }

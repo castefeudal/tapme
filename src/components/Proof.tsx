@@ -56,14 +56,9 @@ export function Proof() {
               "Candidate for Master of Sport: kickboxing",
             )}
           </p>
-          <p className="small-note">
-            {t(
-              "Спортивные звания отражают личную практику и представлены отдельно от квалификаций.",
-              "Sports ranks reflect personal practice and are separate from professional qualifications.",
-            )}
-          </p>
+
           <div className="qualification-timeline">
-            {profile.qualifications.map((q) => (
+            {profile.qualifications.map((q, index) => (
               <details key={q.name}>
                 <summary>
                   <time>{q.year}</time>
@@ -76,6 +71,23 @@ export function Proof() {
                   </span>
                 </summary>
                 <p>{p(q.detail)}</p>
+                <a
+                  className="practice-bridge"
+                  href={["#work-gym", "#work-made", "#next"][index]}
+                >
+                  {t(
+                    [
+                      "Тренировки → MARKOVGYM",
+                      "Питание → MARKOVMADE",
+                      "Цели → план на неделю",
+                    ][index],
+                    [
+                      "Training → MARKOVGYM",
+                      "Nutrition → MARKOVMADE",
+                      "Goals → a weekly plan",
+                    ][index],
+                  )}
+                </a>
                 {q.document && (
                   <a href={q.document}>
                     {t("Подтверждающий документ", "Supporting document")}
@@ -86,8 +98,8 @@ export function Proof() {
           </div>
           <p className="practical-work">
             {t(
-              "Управление проектами, процессы и создание продуктов — отдельная практическая деятельность.",
-              "Project management, operations and product creation are separate areas of practical work.",
+              "Предприниматель, Project / Operations Manager. Создаю MARKOVMADE, MARKOVGYM, PMWORK и образовательные проекты.",
+              "Entrepreneur and project / operations manager. Creator of MARKOVMADE, MARKOVGYM, PMWORK and educational projects.",
             )}
           </p>
         </div>

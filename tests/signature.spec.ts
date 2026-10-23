@@ -14,8 +14,9 @@ test("mobile scene changes keep portrait and actions separate", async ({
       expect(photo).not.toBeNull();
       expect(actions).not.toBeNull();
       if (width < 760) {
-        expect(photo!.height).toBeGreaterThan(300);
+        expect(photo!.height).toBeGreaterThanOrEqual(230);
         expect(actions!.y).toBeGreaterThanOrEqual(photo!.y + photo!.height);
+        expect(actions!.y + actions!.height).toBeLessThan(844);
       }
       expect(
         await page.evaluate(
@@ -33,10 +34,10 @@ test("social registry, contact export, QR and screenshot detail", async ({
   await page.goto("./");
   await expect(page.locator(".social-panel.compact a")).toHaveCount(4);
   await expect(page.locator(".social-panel.expanded a")).toHaveCount(4);
-  await expect(page.locator(".social-pending")).toHaveCount(8);
+  await expect(page.locator(".social-pending")).toHaveCount(0);
   for (const a of await page.locator('a[href^="http"]').all()) {
-    const url = new URL((await a.getAttribute('href'))!);
-    expect(url.protocol).toBe('https:');
+    const url = new URL((await a.getAttribute("href"))!);
+    expect(url.protocol).toBe("https:");
     expect(url.hostname.length).toBeGreaterThan(3);
   }
   for (const a of await page.locator(".social-panel a").all()) {
@@ -51,24 +52,41 @@ test("social registry, contact export, QR and screenshot detail", async ({
     "src",
     /^data:image\/png;base64,/,
   );
+  await page.getByRole("button", { name: "Скрыть QR", exact: true }).click();
+  await expect(page.locator(".contact-qr")).toHaveCount(0);
   const capture = page.locator(".product-capture").first();
-  await capture.getByRole("button", { name: "Детали интерфейса" }).click();
-  await expect(capture).toHaveClass(/capture-detail/);
+  await capture.getByRole("button", { name: "Результат расчёта" }).click();
+  await expect(capture.locator("img")).toHaveAttribute("src", /made-result/);
   await page.locator("#next").scrollIntoViewIfNeeded();
   await page.locator(".answer-list>button").first().click();
   await expect(page.locator(".instant-preview")).toContainText("MARKOVGYM");
 });
-test('contact remains usable with a short mobile visual area',async({page})=>{
- await page.goto('./');await viewport(page,390,844);
- await page.getByRole('button',{name:'Связаться с Павлом',exact:true}).click();
- await viewport(page,390,450);
- const dialog=page.getByRole('dialog');
- const box=await dialog.boundingBox();
- expect(box!.y).toBeGreaterThanOrEqual(0);expect(box!.y+box!.height).toBeLessThanOrEqual(451);
- await dialog.getByRole('link',{name:'Telegram',exact:true}).focus();
- await expect(dialog.getByRole('link',{name:'Telegram',exact:true})).toBeFocused();
- expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
- await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();
+test("contact remains usable with a short mobile visual area", async ({
+  page,
+}) => {
+  await page.goto("./");
+  await viewport(page, 390, 844);
+  await page
+    .getByRole("button", { name: "Связаться с Павлом", exact: true })
+    .click();
+  await viewport(page, 390, 450);
+  const dialog = page.getByRole("dialog");
+  const box = await dialog.boundingBox();
+  expect(box!.y).toBeGreaterThanOrEqual(0);
+  expect(box!.y + box!.height).toBeLessThanOrEqual(451);
+  await dialog.getByRole("link", { name: "Telegram", exact: true }).focus();
+  await expect(
+    dialog.getByRole("link", { name: "Telegram", exact: true }),
+  ).toBeFocused();
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(1);
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
 });
 test("past saved dates survive reload until explicitly rescheduled", async ({
   page,

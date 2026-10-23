@@ -32,6 +32,23 @@ export const defaults: PlanInput = {
   start: localDate(),
   time: "09:00",
 };
+/** Category-specific information must never leak into another kind of plan. */
+export function selectDirection(
+  input: PlanInput,
+  direction: PlanInput["direction"],
+): PlanInput {
+  return direction === input.direction
+    ? input
+    : {
+        ...input,
+        direction,
+        goal: 0,
+        barrier: 0,
+        target: "",
+        owner: "",
+        cue: "",
+      };
+}
 export function validDate(value: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const d = new Date(value + "T12:00:00");
@@ -142,8 +159,8 @@ export function buildPlan(a: PlanInput, lang: Lang) {
     owner:
       a.owner.trim() ||
       t(
-        "Не согласован — уточни владельца результата",
-        "Not agreed — clarify the deliverable owner",
+        "Не согласован — уточни ответственного",
+        "Not agreed — clarify who is responsible",
       ),
     priority: t(
       "Один ближайший результат; остальные задачи — после проверки",
@@ -174,7 +191,9 @@ export function planText(plan: ActionPlan, a: PlanInput, lang: Lang) {
     t("МОЙ СЛЕДУЮЩИЙ ШАГ", "MY NEXT MOVE"),
     plan.title,
     "",
-    t("Начни сегодня: ", "Start today: ") + plan.today,
+    (a.start === localDate()
+      ? t("Начни сегодня: ", "Start today: ")
+      : t("Первое действие: ", "First action: ")) + plan.today,
     t("Следующие 7 дней:", "Next seven days:"),
     ...plan.sessions.map(
       (s) =>
@@ -189,7 +208,9 @@ export function planText(plan: ActionPlan, a: PlanInput, lang: Lang) {
           t("Приоритет: ", "Priority: ") + plan.priority,
         ]
       : []),
-    ...(a.direction === "mind" ? [t("Триггер: ", "Cue: ") + plan.cue] : []),
+    ...(a.direction === "mind"
+      ? [t("Привычное событие: ", "Cue: ") + plan.cue]
+      : []),
     `${t("Ресурс", "Capacity")}: ${fmt(plan.capacity.weekly)} ${t("ч/нед", "h/week")}; ${fmt(plan.capacity.total)} ${t("ч за", "h over")} ${a.weeks} ${t("недель", "weeks")} (${a.adherence}%).`,
     plan.why,
     plan.limit,

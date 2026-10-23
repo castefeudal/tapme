@@ -30,7 +30,7 @@ export function Socials({ expanded = false }: { expanded?: boolean }) {
       aria-label={t("Социальные сети", "Social profiles")}
     >
       {socials
-        .filter((s) => expanded || activeSocial(s.url))
+        .filter((s) => activeSocial(s.url))
         .map((s) => {
           const [width, height, , , path] = s.icon.icon;
           const content = (
@@ -128,11 +128,14 @@ export function DigitalCard() {
           {t("Сохранить контакт", "Save contact")} · vCard
         </button>
         <button onClick={share}>{t("Поделиться", "Share page")}</button>
+        <button onClick={() => copy(cardURL)}>
+          {t("Скопировать ссылку", "Copy page link")}
+        </button>
         <button onClick={() => copy(profile.telegram)}>
           {t("Скопировать Telegram", "Copy Telegram")}
         </button>
         <button onClick={toggleQR} aria-expanded={show}>
-          {t("Показать QR", "Show QR")}
+          {show ? t("Скрыть QR", "Hide QR") : t("Показать QR", "Show QR")}
         </button>
       </div>
       {show && (

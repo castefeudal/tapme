@@ -58,8 +58,10 @@ export function Hero() {
       aria-labelledby="person-title"
     >
       <div className="cover-kicker">
-        <span>PERSONAL EDITION / 01</span>
-        <span>{t("Форма. Мышление. Система.", "Body. Mind. System.")}</span>
+        <span>PAVEL MARKOV / PERSONAL PRACTICE</span>
+        <span>
+          {t("Человек → практика → продукты", "Person → practice → products")}
+        </span>
       </div>
       <div className="cover-scene">
         <h1 id="person-title">
@@ -97,7 +99,7 @@ export function Hero() {
                 ? `${import.meta.env.BASE_URL}media/hero-portrait-small.webp 600w, ${import.meta.env.BASE_URL}media/hero-portrait-medium.webp 800w, ${import.meta.env.BASE_URL}media/hero-portrait.webp 1200w`
                 : undefined
             }
-            sizes={side === 1 ? "(max-width:760px) 90vw, 50vw" : undefined}
+            sizes={side === 1 ? "(max-width:760px) 44vw, (max-width:1100px) 48vw, 46vw" : undefined}
             width={side === 0 ? 600 : 1200}
             height={side === 0 ? 771 : 857}
             alt={mode.alt}
@@ -108,7 +110,10 @@ export function Hero() {
         </div>
         <div className="cover-note" key={"text-" + mode.name}>
           <span className="small-label">
-            {t("Рад знакомству", "Good to meet you")}
+            {t(
+              "Фитнес. Питание. Коучинг. Проекты.",
+              "Fitness. Nutrition. Coaching. Projects.",
+            )}
           </span>
           <p>{mode.text}</p>
           <a className="quiet-link" href={mode.link}>
@@ -121,11 +126,43 @@ export function Hero() {
             <span aria-hidden="true">↗</span>
           </a>
           <a className="quiet-link" href="#work">
-            {t("Посмотреть мои проекты", "Explore my work")}
+            {t("Мои проекты", "My projects")}
+          </a>
+          <a
+            className="hero-contact quiet-link"
+            href={profile.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("Написать в Telegram", "Message me on Telegram")}
           </a>
         </div>
+        <div className="cover-socials">
+          <Socials />
+        </div>
+        <nav
+          className="audience-paths"
+          aria-label={t("Что тебе нужно сейчас", "What are you here for?")}
+        >
+          <a href="#work-made">
+            <span>01</span>
+            <strong>{t("Для себя", "For yourself")}</strong>
+            <small>
+              {t(
+                "Тренировки, питание, развитие",
+                "Training, nutrition, personal goals",
+              )}
+            </small>
+          </a>
+          <a href="#work-pm">
+            <span>02</span>
+            <strong>{t("Для работы", "For your work")}</strong>
+            <small>
+              {t("Задачи, процессы, решения", "Tasks, processes, decisions")}
+            </small>
+          </a>
+        </nav>
       </div>
-      <Socials />
       <div className="cover-bottom">
         <div
           className="side-switch"
@@ -143,7 +180,7 @@ export function Hero() {
             </button>
           ))}
         </div>
-        <p>{t("Три стороны. Один человек.", "Three sides. One person.")}</p>
+        <p>{t("Смена кадра", "Change the scene")}</p>
         <a className="cover-index" href="#next">
           {t("ДАЛЬШЕ — ТВОЙ ШАГ", "NEXT — YOUR MOVE")}{" "}
           <span aria-hidden="true">↓</span>

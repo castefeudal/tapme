@@ -14,7 +14,6 @@
   --button-text: #f5f0e7;
 }
 .next-intro h2 {
-  font-size: clamp(40px, 4.3vw, 68px);
   margin-bottom: 25px;
 }
 .next-intro > p:not(.chapter) {
@@ -466,7 +465,6 @@
     gap: 35px;
   }
   .next-intro h2 {
-    font-size: clamp(39px, 6.5vw, 60px);
     margin-bottom: 20px;
   }
   .next-intro > p:not(.chapter) {
@@ -540,7 +538,7 @@
     min-height: 82px;
   }
   .answer-code {
-    flex-basis: 72px;
+    flex-basis: 67px;
     font-size: 14px;
   }
   .answer-list strong {
@@ -656,9 +654,6 @@
   .privacy-note {
     font-size: 12px;
   }
-  .answer-code {
-    flex-basis: 67px;
-  }
 }
 @media (max-width: 350px) {
   .trajectory {
@@ -692,5 +687,49 @@
   }
   .action-document {
     padding: 20px 14px;
+  }
+}
+.instant-preview {
+  padding: 24px;
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  margin: 22px 0 28px;
+}
+.instant-preview p {
+  margin: 12px 0;
+  line-height: 1.7;
+}
+.instant-preview a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.stale-plan {
+  padding: 18px;
+  background: #e6d3aa;
+  color: #30271c;
+  margin: 20px 0;
+  border: 1px solid #9a7d49;
+}
+.stale-plan button {
+  border-color: #8e744e;
+  margin-top: 12px;
+}
+.capacity-details summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: list-item;
+  padding: 12px 0;
+  font-weight: 600;
+}
+.capacity-details .time-total {
+  margin-top: 18px;
+}
+@media (max-width: 760px) {
+  .instant-preview {
+    padding: 18px;
   }
 }

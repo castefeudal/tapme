@@ -1,3 +1,4 @@
+import { productScenes } from "../config/product-scenes";
 import { useState } from "react";
 import { useExperience } from "../hooks/useExperience";
 import { Media, base } from "./Primitives";
@@ -13,34 +14,54 @@ export function ProductCapture({
   name: string;
 }) {
   const { t } = useExperience();
-  const [detail, setDetail] = useState(false);
+  const [scene, setScene] = useState(0);
+  const scenes = productScenes[name] || [];
+  const selected = scenes[scene];
+  const file = selected ? "media/" + selected.file + ".webp" : image;
   return (
-    <figure
-      className={"product-capture " + (detail ? "capture-detail" : "")}
-      data-enter
-    >
+    <figure className="product-capture product-scenes" data-enter>
       <div
         className="capture-controls"
         role="group"
         aria-label={t("Вид снимка ", "Screenshot view: ") + name}
       >
-        <button aria-pressed={!detail} onClick={() => setDetail(false)}>
-          {t("Весь экран", "Full screen")}
-        </button>
-        <button aria-pressed={detail} onClick={() => setDetail(true)}>
-          {t("Детали интерфейса", "Interface detail")}
+        {scenes.map((item, k) => (
+          <button
+            key={item.file}
+            aria-pressed={scene === k}
+            onClick={() => setScene(k)}
+          >
+            {t(item.label[0], item.label[1])}
+          </button>
+        ))}
+        <button
+          aria-pressed={scene === scenes.length}
+          onClick={() => setScene(scenes.length)}
+        >
+          {t("Общий вид", "Overview")}
         </button>
       </div>
       <a
-        href={base + image}
+        href={base + file}
         target="_blank"
         rel="noreferrer"
         aria-label={t("Увеличить снимок ", "Enlarge capture of ") + name}
       >
-        <Media src={image} width="1200" height="833" loading="lazy" alt={alt} />
+        <Media
+          key={file}
+          src={file}
+          width={selected ? 430 : 1200}
+          height={selected ? 900 : 833}
+          loading="lazy"
+          alt={
+            selected
+              ? name + " — " + t(selected.label[0], selected.label[1])
+              : alt
+          }
+        />
       </a>
       <figcaption>
-        {capture} ·{" "}
+        {selected ? t(selected.note[0], selected.note[1]) : capture} ·{" "}
         {t("Открыть оригинальный снимок", "Open original screenshot")}
       </figcaption>
     </figure>

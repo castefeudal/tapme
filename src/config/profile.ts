@@ -47,10 +47,7 @@ export const profile = {
       year: 2026,
       name: "ICA",
       area: ["Мышление и развитие", "Mindset & development"],
-      detail: [
-        "Коучинг и работа с целями.",
-        "Coaching and goal setting.",
-      ],
+      detail: ["Коучинг и работа с целями.", "Coaching and goal setting."],
       document: null,
     },
   ],

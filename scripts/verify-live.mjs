@@ -44,6 +44,21 @@ await Promise.all(
         throw Error(`Published bundle mismatch: ${file}`);
     }),
 );
+await Promise.all(
+  (await readdir("public/media"))
+    .filter((file) => /\.(webp|jpg)$/.test(file))
+    .map(async (file) => {
+      const remote = await fetch(root + "media/" + file + "?sha=" + expected);
+      if (!remote.ok) throw Error(`Public media unavailable: ${file}`);
+      const digest = (value) =>
+        createHash("sha256").update(value).digest("hex");
+      if (
+        digest(Buffer.from(await remote.arrayBuffer())) !==
+        digest(await readFile("public/media/" + file))
+      )
+        throw Error(`Public media mismatch: ${file}`);
+    }),
+);
 for (const file of [
   "media/hero-portrait.webp",
   "media/signature-og.jpg",

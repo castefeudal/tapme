@@ -213,10 +213,12 @@ test("mobile menu, missing media, storage and clipboard failure", async ({
   await viewport(page, 320, 800);
   await page.getByRole("button", { name: "Меню", exact: true }).click();
   await page
-    .getByRole("navigation")
+    .getByRole("navigation", { name: "Главная навигация" })
     .getByRole("link", { name: "Проекты", exact: true })
     .click();
-  await expect(page.getByRole("navigation")).not.toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Главная навигация" }),
+  ).not.toBeVisible();
   await expect(page.locator(".cover .media-fallback")).toBeVisible();
   await makePlan(page);
   await page
